@@ -16,66 +16,90 @@ ActiveRecord::Schema.define(version: 2021_07_28_123228) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
+    t.string "comment", null: false
     t.string "commentable_type"
     t.bigint "commentable_id"
+    t.bigint "users_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["users_id"], name: "index_comments_on_users_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
-    t.integer "dislike"
-    t.integer "like"
-    t.float "rating"
+    t.integer "dislike", null: false
+    t.integer "like", null: false
+    t.float "rating", null: false
+    t.bigint "users_id"
+    t.bigint "ideas_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ideas_id"], name: "index_feedbacks_on_ideas_id"
+    t.index ["users_id"], name: "index_feedbacks_on_users_id"
   end
 
   create_table "ideas", force: :cascade do |t|
-    t.string "idea_name"
-    t.string "idea_description"
-    t.string "need"
-    t.string "geo"
-    t.string "problem"
-    t.string "industry"
-    t.boolean "visible"
+    t.string "idea_name", limit: 225, null: false
+    t.string "idea_description", null: false
+    t.string "need", null: false
+    t.string "geo", null: false
+    t.string "problem", limit: 225, null: false
+    t.string "industry", null: false
+    t.boolean "visible", null: false
+    t.bigint "teams_id"
+    t.bigint "users_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["teams_id"], name: "index_ideas_on_teams_id"
+    t.index ["users_id"], name: "index_ideas_on_users_id"
   end
 
   create_table "roles", force: :cascade do |t|
-    t.integer "role"
+    t.integer "role", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sponsors", force: :cascade do |t|
-    t.string "industry"
-    t.string "geo"
-    t.string "opportunity"
+    t.string "industry", null: false
+    t.string "geo", null: false
+    t.string "opportunity", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "team_members", force: :cascade do |t|
-    t.integer "team_role"
+    t.integer "team_role", null: false
+    t.bigint "teams_id"
+    t.bigint "users_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["teams_id"], name: "index_team_members_on_teams_id"
+    t.index ["users_id"], name: "index_team_members_on_users_id"
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "team_name"
+    t.string "team_name", limit: 225, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "password"
+    t.string "first_name", limit: 225, null: false
+    t.string "last_name", limit: 225, null: false
+    t.string "email", limit: 225, null: false
+    t.bigint "role_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "comments", "users", column: "users_id"
+  add_foreign_key "feedbacks", "ideas", column: "ideas_id"
+  add_foreign_key "feedbacks", "users", column: "users_id"
+  add_foreign_key "ideas", "teams", column: "teams_id"
+  add_foreign_key "ideas", "users", column: "users_id"
+  add_foreign_key "team_members", "teams", column: "teams_id"
+  add_foreign_key "team_members", "users", column: "users_id"
+  add_foreign_key "users", "roles"
 end

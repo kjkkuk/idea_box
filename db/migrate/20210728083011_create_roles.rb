@@ -1,7 +1,7 @@
 class CreateRoles < ActiveRecord::Migration[6.1]
   def change
     create_table :roles do |t|
-      t.integer :role
+      t.integer :role, null: false
 
       t.timestamps
     end
