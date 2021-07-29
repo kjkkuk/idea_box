@@ -23,10 +23,7 @@ class Idea < ApplicationRecord
   belongs_to :user
   belongs_to :team
 
-  validates :idea_name, :problem, :need, :geo, :industry,
-            presence: true, length: { maximum: 50 }
+  validates :idea_name, :problem, :need, :geo, :industry, presence: true, length: { maximum: 50 }
   validates :idea_description, presence: true, length: { maximum: 300 }
-  validates :visible, inclusion: { in: [ true, false ] }
-
-
+  validates :visible, inclusion: { in: [true, false] }
 end

@@ -19,5 +19,4 @@ class Feedback < ApplicationRecord
 
   validates :like, :dislike, presence: true
   validates :rating, numericality: true
-
 end

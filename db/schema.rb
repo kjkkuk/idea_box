@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2021_07_28_123228) do
     t.bigint "role_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email"
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
