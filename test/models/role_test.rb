@@ -5,7 +5,7 @@
 # Table name: roles
 #
 #  id         :bigint           not null, primary key
-#  role       :integer
+#  role       :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

@@ -5,10 +5,10 @@
 # Table name: users
 #
 #  id         :bigint           not null, primary key
-#  first_name :string
-#  last_name  :string
-#  email      :string
-#  password   :string
+#  first_name :string(225)      not null
+#  last_name  :string(225)      not null
+#  email      :string(225)      not null
+#  role_id    :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

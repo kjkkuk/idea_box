@@ -5,7 +5,7 @@
 # Table name: teams
 #
 #  id         :bigint           not null, primary key
-#  team_name  :string
+#  team_name  :string(225)      not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
