@@ -1,0 +1,538 @@
+inherit_from: .rubocop_todo.yml
+inherit_mode:
+  merge:
+    - Exclude
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - public/bower_components/**/*
+    - public/node_modules/**/*
+    - vendor/**/*
+    - lib/tasks/**/*
+    - db/schema.rb
+    - db/migrate/*
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+  UseCache: true
+  TargetRubyVersion: 2.6
+  TargetRailsVersion: 6.0
+  EnabledByDefault: true
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: true
+
+Rails:
+  Enabled: true
+
+Rails/HttpPositionalArguments:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - lib/**/*.rake
+    - test/**/*
+    - spec/**/*
+
+Layout/CaseIndentation:
+  Enabled: true
+  EnforcedStyle: case
+  SupportedStyles:
+    - case
+    - end
+  IndentOneStep: true
+  # By default, the indentation width from Style/IndentationWidth is used
+  # But it can be overridden by setting this parameter
+  # This only matters if IndentOneStep is true
+  IndentationWidth: ~
+
+Rails/SaveBang:
+  Enabled: false
+
+Style/CollectionMethods:
+  Description: Preferred collection methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#map-find-select-reduce-size
+  Enabled: true
+  PreferredMethods:
+    collect: map
+    collect!: map!
+    find: detect
+    find_all: select
+    inject: reduce
+
+Style/ConditionalAssignment:
+  Enabled: true
+
+Style/MultilineBlockChain:
+  Description: 'Avoid multi-line chains of blocks.'
+  StyleGuide: '#single-line-blocks'
+  Enabled: true
+  Exclude:
+    - test/**/*
+    - spec/**/*
+
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+  Exclude:
+    - test/**/*
+    - spec/**/*
+
+Style/BlockDelimiters:
+  Enabled: true
+  Exclude:
+    - test/**/*
+    - spec/**/*
+
+Layout/FirstHashElementLineBreak:
+  Description: This cop checks for a line break before the first element in a multi-line hash.
+  Enabled: false
+
+Layout/FirstArrayElementLineBreak:
+  Description: This cop checks for a line break before the first element in a multi-line array.
+  Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  Description: Use parentheses for method calls with arguments. (Disabled force)
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Description: This cop enforces empty line after guard clause.
+  Enabled: false
+
+Style/Copyright:
+  Description: Check that a copyright notice was given in each source file.
+  Enabled: false
+
+Layout/FirstMethodArgumentLineBreak:
+  Description: This cop checks for a line break before the first argument in a multi-line method call.
+  Enabled: false
+
+Style/AutoResourceCleanup:
+  Description: Will use a block accepting version of a method that does automatic resource cleanup.
+  Enabled: true
+
+Layout/DotPosition:
+  Description: Checks the position of the dot in multi-line method calls.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains
+  Enabled: false
+  EnforcedStyle: trailing
+  SupportedStyles:
+    - leading
+    - trailing
+
+Naming/FileName:
+  Description: Use snake_case for source file names.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-files
+  Enabled: true
+  Exclude: []
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  Exclude:
+    - app/views/**/*
+
+Style/SymbolArray:
+  Enabled: true
+
+Style/GlobalVars:
+  AllowedVariables: [$lens_s3_proc_id]
+
+Style/GuardClause:
+  Description: Check for conditionals that can be replaced with guard clauses
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals
+  Enabled: true
+  MinBodyLength: 1
+
+Style/IfUnlessModifier:
+  Description: Favor modifier if/unless usage when you have a single-line body.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier
+  Enabled: true
+
+Style/NumericPredicate:
+  Enabled: true
+
+Style/OptionHash:
+  Description: Don't use option hashes when you can use keyword arguments.
+  Enabled: false
+
+Style/ReturnNil:
+  Description: This cop enforces consistency between 'return nil' and 'return'.
+  Enabled: true
+  EnforcedStyle: return
+
+Style/StringHashKeys:
+  Description: This cop checks for the use of strings as keys in hashes. The use of symbols is
+    preferred instead.
+  Enabled: false
+  Exclude:
+    - spec/**/*
+    - test/**/*
+
+Style/OptionalArguments:
+  Description: This cop checks for optional arguments to methods that do not come at the end of
+    the argument list
+  Enabled: true
+
+Style/PercentLiteralDelimiters:
+  Description: Use `%`-literal delimiters consistently
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#percent-literal-braces
+  Enabled: true
+  PreferredDelimiters:
+    "%": "()"
+    "%i": "()"
+    "%q": "()"
+    "%Q": "()"
+    "%r": "{}"
+    "%s": "()"
+    "%w": "()"
+    "%W": "()"
+    "%x": "()"
+
+Naming/PredicateName:
+  Description: Check the names of predicate methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#bool-methods-qmark
+  Enabled: true
+  NamePrefix:
+    - is_
+    - has_
+    - have_
+  ForbiddenPrefixes:
+    - is_
+    - has_
+    - have_
+  Exclude:
+    - spec/**/*
+    - app/serializers/**/*
+
+Style/RaiseArgs:
+  Description: Checks the arguments passed to raise/fail.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#exception-class-messages
+  Enabled: false
+  EnforcedStyle: exploded
+  SupportedStyles:
+    - compact
+    - exploded
+
+Style/SignalException:
+  Description: Checks for proper usage of fail and raise.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#fail-method
+  Enabled: true
+  EnforcedStyle: semantic
+  SupportedStyles:
+    - only_raise
+    - only_fail
+    - semantic
+
+Style/SingleLineBlockParams:
+  Description: Enforces the names of some block params.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#reduce-blocks
+  Enabled: true
+  Methods:
+    - reduce:
+        - acc
+        - elem
+    - inject:
+        - acc
+        - elem
+
+Style/SingleLineMethods:
+  Description: Avoid single-line methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-single-line-methods
+  Enabled: true
+  AllowIfMethodIsEmpty: true
+
+Layout/SpaceInsideRangeLiteral:
+  Enabled: true
+
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+  EnforcedStyle: same_line
+
+Style/StringLiterals:
+  Description: Checks if uses of quotes match the configured preference.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-string-literals
+  Enabled: true
+  EnforcedStyle: single_quotes
+  SupportedStyles:
+    - single_quotes
+    - double_quotes
+
+Style/StringLiteralsInInterpolation:
+  Description: Checks if uses of quotes inside expressions in interpolated strings
+    match the configured preference.
+  Enabled: true
+  EnforcedStyle: single_quotes
+  SupportedStyles:
+    - single_quotes
+    - double_quotes
+
+Style/TrailingCommaInArguments:
+  Description: 'Checks for trailing comma in argument lists.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
+  Enabled: true
+  EnforcedStyleForMultiline: no_comma
+  SupportedStylesForMultiline:
+    - comma
+    - consistent_comma
+    - no_comma
+
+Style/TrailingCommaInArrayLiteral:
+  Description: 'Checks for trailing comma in array literals.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
+  Enabled: true
+  EnforcedStyleForMultiline: no_comma
+  SupportedStylesForMultiline:
+    - no_comma
+
+Metrics/AbcSize:
+  Description: A calculated magnitude based on number of assignments, branches, and
+    conditions.
+  Enabled: true
+  Max: 17
+  Exclude:
+    - test/**/*
+
+Metrics/ClassLength:
+  Description: Avoid classes longer than 200 lines of code.
+  Enabled: true
+  CountComments: false
+  Max: 200
+
+Metrics/ModuleLength:
+  CountComments: false
+  Max: 200
+  Description: Avoid modules longer than 200 lines of code.
+  Enabled: true
+
+Metrics/CyclomaticComplexity:
+  Description: A complexity metric that is strongly correlated to the number of test
+    cases needed to validate a method.
+  Enabled: true
+  Max: 8
+
+Metrics/MethodLength:
+  Description: Avoid methods longer than 10 lines of code.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#short-methods
+  Enabled: true
+  CountComments: false
+  Max: 20
+  Exclude:
+    - db/migrate/*
+
+Metrics/ParameterLists:
+  Description: Avoid parameter lists longer than three or four parameters.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#too-many-params
+  Enabled: true
+  Max: 4
+  CountKeywordArgs: false
+
+Metrics/PerceivedComplexity:
+  Description: A complexity metric geared towards measuring complexity for a human
+    reader.
+  Enabled: true
+  Max: 8
+
+Lint/AssignmentInCondition:
+  Description: Don't use assignment in conditions.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#safe-assignment-in-condition
+  Enabled: true
+  AllowSafeAssignment: true
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+  Exclude:
+    - test/**/*
+    - spec/**/*
+
+Lint/ConstantResolution:
+  Enabled: false
+
+Style/InlineComment:
+  Description: Avoid inline comments.
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Description: Check the naming of accessor methods for get_/set_.
+  Enabled: true
+
+Style/MissingElse:
+  Description: Checks for if expressions that do not have an else branch.
+  Enabled: false
+
+Style/Alias:
+  Description: Use alias_method instead of alias.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#alias-method
+  EnforcedStyle: prefer_alias_method
+  Enabled: true
+
+Style/Documentation:
+  Description: Document classes and non-namespace modules.
+  Enabled: false
+
+Style/DocumentationMethod:
+  Description: Checks for missing documentation comment for public methods
+  Enabled: false
+
+Style/DoubleNegation:
+  Description: Checks for uses of double negation (!!).
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-bang-bang
+  Enabled: true
+
+Style/EachWithObject:
+  Description: Prefer `each_with_object` over `inject` or `reduce`.
+  Enabled: false
+
+Style/EmptyLiteral:
+  Description: Prefer literals to Array.new/Hash.new/String.new.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#literal-array-hash
+  Enabled: true
+
+Style/ModuleFunction:
+  Description: Checks for usage of `extend self` in modules.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#module-function
+  Enabled: true
+
+Style/OneLineConditional:
+  Description: Favor the ternary operator(?:) over if/then/else/end constructs.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#ternary-operator
+  Enabled: true
+
+Style/PerlBackrefs:
+  Description: Avoid Perl-style regex back references.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-perl-regexp-last-matchers
+  Enabled: true
+
+Style/Send:
+  Description: Prefer `Object#__send__` or `Object#public_send` to `send`, as `send`
+    may overlap with existing methods.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#prefer-public-send
+  Enabled: true
+
+Style/SpecialGlobalVars:
+  Description: Avoid Perl-style global variables.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-cryptic-perlisms
+  Enabled: true
+
+Style/VariableInterpolation:
+  Description: Don't interpolate global, instance and class variables directly in
+    strings.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#curlies-interpolate
+  Enabled: true
+
+Style/WhenThen:
+  Description: Use when x then ... for one-line cases.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#one-line-cases
+  Enabled: false
+
+Lint/EachWithObjectArgument:
+  Description: Check for immutable argument given to each_with_object.
+  Enabled: true
+
+Lint/SuppressedException:
+  Description: Don't suppress exception.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions
+  Enabled: true
+
+Lint/LiteralInInterpolation:
+  Description: Checks for literals used in interpolation.
+  Enabled: true
+
+Performance/ChainArrayAllocation:
+  Description: >-
+    Instead of chaining array methods that allocate new arrays, mutate an
+    existing array.
+  Reference: 'https://twitter.com/schneems/status/1034123879978029057'
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: true
+
+Rails/InverseOf:
+  Enabled: true
+
+Rails/SafeNavigation:
+  Enabled: true
+
+Rails/SkipsModelValidations:
+  Enabled: true
+  Exclude:
+    - test/**/*
+    - spec/**/*
+
+Rails/TimeZone:
+  Enabled: true
+
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+  IgnoredPatterns: ['^ *# ']
+
+Lint/UselessAssignment:
+  Enabled: true
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: true
+
+RSpec/AlignLeftLetBrace:
+  Enabled: false
+
+RSpec/AlignRightLetBrace:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: true
+
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: true
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/HookArgument:
+  Enabled: true
+
+RSpec/LetSetup:
+  Enabled: true
+
+RSpec/NamedSubject:
+  Enabled: true
+
+RSpec/NotToNot:
+  Enabled: true
+
+RSpec/SubjectStub:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: true
+  Max: 30
+
+Style/ClassAndModuleChildren:
+  Enabled: true
+
+Style/ConstantVisibility:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: true
+
+Bundler/GemComment:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: true
+  EnforcedStyle: snake_case
+  Exclude:
+    - test/**/*
+    - spec/**/*
