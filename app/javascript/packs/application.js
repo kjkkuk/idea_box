@@ -7,7 +7,11 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import 'materialize-css/dist/js/materialize'
+import "jquery"
+// import ''
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+//= require materialize

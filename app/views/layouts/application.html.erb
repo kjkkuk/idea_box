@@ -3,14 +3,35 @@
   <head>
     <title>IdeaBox</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
   </head>
 
   <body>
+    <header>
+      <%= render "layouts/nav/public" %>
+    </header>
+
+    <div class="container">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+    </div>
+
     <%= yield %>
+
+    <footer>
+      <%= render "layouts/footer" %>
+    </footer>
+
   </body>
 </html>

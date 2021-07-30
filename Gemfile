@@ -24,6 +24,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'materialize-sass', '~> 1.0.0'
+
+gem 'devise'
 # authorization library
 gem 'cancancan', '~>3.3.0'
 # add comments
