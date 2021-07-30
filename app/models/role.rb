@@ -13,4 +13,7 @@ class Role < ApplicationRecord
   has_many :users, dependent: :destroy
 
   validates :role, presence: true
+
+  enum role: %w[admin user].freeze
+
 end

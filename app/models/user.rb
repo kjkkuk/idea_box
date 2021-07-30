@@ -13,6 +13,20 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  before_validation :set_default_role, on: [:create]
+
+  private
+  def set_default_role
+    self.role ||= Role.find_by(role: 'user')
+  end
+
+
+
   belongs_to :role
 
   has_many :team_members, dependent: :destroy
@@ -23,6 +37,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
-  validates :email, presence: true, length: { maximum: 250 }, format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { scope: :user_id }
+  validates :email, presence: true, length: { maximum: 250 }, format: { with: VALID_EMAIL_REGEX }
+
+
 end
