@@ -28,19 +28,21 @@ gem 'materialize-sass', '~> 1.0.0'
 
 gem 'pry', '~>0.14.1'
 
-gem 'devise'
+gem 'devise', '~>4.8.0'
 # authorization library
 gem 'cancancan', '~>3.3.0'
 # add comments
 gem 'annotate', '~>3.1.1'
 
-gem 'dotenv-rails'
+gem 'lefthook', '~>0.7.6'
 
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
-gem "omniauth-rails_csrf_protection"
+gem 'dotenv-rails', '~>2.7.6'
+
+gem 'omniauth', '~>2.0.4'
+gem 'omniauth-facebook', '~>8.0.0'
+gem 'omniauth-google-oauth2', '~1.0.0'
+gem 'omniauth-github', '~>2.0.0'
+gem 'omniauth-rails_csrf_protection', '~>1.0.0'
 gem 'omniauth-linkedin-oauth2', '~> 1.0.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -62,8 +64,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
-  gem 'rubocop-rails'
-  gem 'rubocop'
+  gem 'rubocop-rails', '~>2.11.3'
+  gem 'rubocop', '~>1.18.4'
   gem 'rubocop-performance', '~> 1.11.0'
   gem 'rubocop-rspec', '~> 2.4.0'
 end
