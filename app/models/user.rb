@@ -23,11 +23,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :github, :google_oauth2, :linkedin]
 
-  validates_presence_of :email
+  validates :email, presence: true
   before_validation :set_default_role, on: [:create]
   belongs_to :role
 
-  has_many :authorizations
+  has_many :authorizations, dependent: :destroy
   has_many :team_members, dependent: :destroy
   has_many :teams, through: :team_members, dependent: :destroy
   has_many :ideas, dependent: :destroy
@@ -42,20 +42,18 @@ class User < ApplicationRecord
     data = access_token.info
     user = User.where(email: data['email']).first
 
-    unless user
-        user = User.create(
-           first_name: data['name'].split(' ').first,
-           last_name: data['name'].split(' ').last,
-           email: data['email'],
-           password: Devise.friendly_token[0,20]
-        )
-    end
+    user ||= User.create(
+      first_name: data['name'].split.first,
+      last_name: data['name'].split.last,
+      email: data['email'],
+      password: Devise.friendly_token[0, 20]
+    )
     user
   end
 
-  def self.new_with_session(params,session)
-    if session["devise.user_attributes"]
-      new(session["devise.user_attributes"],without_protection: true) do |user|
+  def self.new_with_session(params, session)
+    if session['devise.user_attributes']
+      new(session['devise.user_attributes'], without_protection: true) do |user|
         user.attributes = params
         user.valid?
       end
@@ -65,8 +63,8 @@ class User < ApplicationRecord
   end
 
   private
+
   def set_default_role
     self.role ||= Role.find_by(role: 'user')
   end
-
 end

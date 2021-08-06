@@ -1,14 +1,14 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :validate_authorization_for_user, only: [:edit, :update]
 
   # GET /users/1
-  def show
-  end
+  def show; end
 
   # GET /users/1/edit
-  def edit
-  end
+  def edit; end
 
   def index
     @users = User.all
@@ -16,8 +16,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    # 2015-07-23 RICHARD: Updated to use strong parameters
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render action: 'edit'
@@ -25,6 +24,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
@@ -34,7 +34,6 @@ class UsersController < ApplicationController
     redirect_to root_path unless @user == current_user
   end
 
-  # 2015-07-23 RICHARD: Added to implement strong parameters
   def user_params
     params.require(:user).permit(:name, :user, :about)
   end

@@ -14,6 +14,5 @@ class Role < ApplicationRecord
 
   validates :role, presence: true
 
-  enum role: %w[admin user].freeze
-
+  enum role: %w(admin user).freeze
 end
