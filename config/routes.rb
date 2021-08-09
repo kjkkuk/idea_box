@@ -2,8 +2,7 @@
 
 # == Route Map
 #
-# root to: "home#index"
-
+#
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 

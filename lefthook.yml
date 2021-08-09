@@ -1,21 +1,9 @@
-# EXAMPLE USAGE
-# Refer for explanation to following link:
-# https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md
-
-  pre-commit:
-    parallel: true
-    commands:
-      audit:
-        run: brakeman --no-pager
-      rubocop:
-        files: git diff --name-only --staged
-        glob: "*.rb"
-        run: rubocop --force-exclusion {files}
-# pre-push:
-#   commands:
-#     packages-audit:
-#       tags: frontend security
-#       run: yarn audit
-#     gems-audit:
-#       tags: backend security
-#       run: bundle audit
+pre-commit:
+  parallel: true
+  commands:
+    audit:
+      run: brakeman --no-pager
+    rubocop:
+      files: git diff --name-only --staged
+      glob: "*.rb"
+      run: rubocop --force-exclusion {files}
