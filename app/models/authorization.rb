@@ -16,17 +16,4 @@
 #
 class Authorization < ApplicationRecord
   belongs_to :user
-
-  after_create :fetch_details
-
-  def fetch_details
-    public_send("fetch_details_from_#{provider.downcase}")
-  end
-
-  def fetch_details_from_facebook
-    graph = Koala::Facebook::API.new(token)
-    facebook_data = graph.get_object('me')
-    self.username = facebook_data['username']
-    save
-  end
 end
