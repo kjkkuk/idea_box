@@ -9,3 +9,29 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Role.find_or_create_by(role: :admin)
 Role.find_or_create_by(role: :user)
+
+t_name = %w(anxiety
+            method
+            proposal
+            message
+            police
+            poet
+            expression
+            baseball
+            presence
+            newspaper
+            penalty
+            thanks
+            wood
+            property
+            blood
+            emotion
+            opportunity
+            art
+            gene
+            presentation
+            preparation
+            studio).freeze
+t_name.each do |name|
+  Team.find_or_create_by(team_name: name.capitalize)
+end
