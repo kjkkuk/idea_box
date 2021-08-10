@@ -9,6 +9,8 @@
 
 .idea/
 
+.env
+
 .ruby-version
 
 .gitattributes

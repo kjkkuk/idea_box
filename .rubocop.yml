@@ -291,7 +291,7 @@ Metrics/AbcSize:
   Description: A calculated magnitude based on number of assignments, branches, and
     conditions.
   Enabled: true
-  Max: 17
+  Max: 21
   Exclude:
     - test/**/*
 
@@ -531,7 +531,7 @@ Bundler/GemComment:
   Enabled: false
 
 Naming/VariableNumber:
-  Enabled: true
+  Enabled: false
   EnforcedStyle: snake_case
   Exclude:
     - test/**/*
