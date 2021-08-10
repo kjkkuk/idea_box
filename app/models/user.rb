@@ -23,6 +23,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :github, :google_oauth2, :linkedin]
 
+  attr_accessor :auth, :current_user
+
   validates :email, presence: true
   before_validation :set_default_role, on: [:create]
   belongs_to :role
@@ -38,37 +40,40 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 250 }, format: { with: VALID_EMAIL_REGEX }
 
-  def self.from_omniauth(auth, current_user)
-    binding.pry
-    joins(:authorizations).where({authorizations: { provider: auth.provider, uid: auth.uid}}).first_or_create do |user|
+  def self.create_user
+    @auth = request.env['omniauth.auth']
+    auth = @auth
+    joins(:authorizations).where(authorizations: { provider: auth.provider,
+                                                   uid: auth.uid }).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.first_name = auth.info.name
     end
+  end
 
-    # check for existing authorization
-    # Find or create Authorization with: provider, uid, token and secret
-    authorization = Authorization.where(
-      :provider => auth.provider,
-      :uid => auth.uid.to_s,
-      :token => auth.credentials.token,
-      :secret => auth.credentials.secret
+  def self.create_own_user(auth)
+    User.create(
+      email: auth.info.email,
+      password: Devise.friendly_token[0, 20],
+      first_name: auth.info.name.split.first,
+      last_name: auth.info.name.split.last
+    )
+  end
+
+  def self.detect_auth(auth)
+    Authorization.where(
+      provider: auth.provider,
+      uid: auth.uid.to_s,
+      token: auth.credentials.token,
+      secret: auth.credentials.secret
     ).first_or_initialize
+  end
 
+  def self.from_omniauth(auth, current_user)
+    authorization = detect_auth(auth)
     if authorization.user.blank?
-      user = current_user.nil? ? User.where('email = ?', auth["info"]["email"]).first : current_user
-
-      if user.blank?
-        user = User.create(
-          :email            => auth.info.email,
-          :password         => Devise.friendly_token[0, 20],
-          :first_name       => auth.info.name.split.first,
-          :last_name        => auth.info.name.split.last
-        )
-      end
-
-      # store authorization related data in authorization table
-      authorization.username = auth.info.nickname
+      user = current_user.nil? ? User.where(email: auth['info']['email']).first : current_user
+      user = create_own_user(auth) if user.blank?
       authorization.user_id = user.id
       authorization.save!
     end
