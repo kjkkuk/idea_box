@@ -52,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def self.create_own_user(auth)
-    User.create(
+    User.create!(
       email: auth.info.email,
       password: Devise.friendly_token[0, 20],
       first_name: auth.info.name.split.first,
@@ -61,12 +61,13 @@ class User < ApplicationRecord
   end
 
   def self.detect_auth(auth)
-    Authorization.where(
+    Authorization.find_or_initialize_by(
       provider: auth.provider,
       uid: auth.uid.to_s,
-      token: auth.credentials.token,
       secret: auth.credentials.secret
-    ).first_or_initialize
+    ) do |db_auth|
+      db_auth.token = auth.credentials.token
+    end
   end
 
   def self.from_omniauth(auth, current_user)
