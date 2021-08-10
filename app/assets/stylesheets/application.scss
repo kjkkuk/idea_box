@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 @import "materialize";
 @import "materialize/components/color-variables";
