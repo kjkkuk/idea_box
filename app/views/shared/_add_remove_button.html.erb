@@ -1,0 +1,11 @@
+<% unless record.where(user: current_user).first.present?%>
+  <td style="width: 5%"><%= link_to('', add_to_collection_team_path(record),
+                                    method: :patch,
+                                    class: 'btn btn-success btn-circle fa fa-plus',
+                                    id: 'add_to_collection') %></td>
+<% else %>
+  <td style="width: 5%"><%= link_to('', remove_from_collection_team_path(record),
+                                    method: :delete,
+                                    class: 'btn btn-secondary btn-circle fa fa-times',
+                                    id: 'remove_from_collection') %></td>
+<% end %>
