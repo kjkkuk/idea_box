@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
-class TeamsPolicy < ApplicationPolicy
+class TeamPolicy < ApplicationPolicy
   def index?
     true
   end
 
+  def show?
+    true
+  end
+
   def create?
-    user.present?
+    true
   end
 
   def update?

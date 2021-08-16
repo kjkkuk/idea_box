@@ -12,9 +12,9 @@ require 'faker'
 Role.find_or_create_by(role: :admin)
 Role.find_or_create_by(role: :user)
 
-30.times do
-  Team.find_or_create_by(team_name: Faker::Team.name)
-end
+# 30.times do
+#   Team.find_or_create_by(team_name: Faker::Team.name)
+# end
 
 User.create!(first_name: 'Dima',
              last_name: 'Yakutovich',
@@ -22,16 +22,16 @@ User.create!(first_name: 'Dima',
              password: '1234567',
              password_confirmation: '1234567')
 
-99.times do
-  first_name = Faker::FunnyName.name.split.first
-  last_name = Faker::FunnyName.name.split.last
-  email = Faker::Internet.email
-  password = '1234567'
-  User.create!(first_name: first_name,
-               last_name: last_name,
-               email: email,
-               password: password,
-               password_confirmation: password)
-end
+# 99.times do
+#   first_name = Faker::FunnyName.name.split.first
+#   last_name = Faker::FunnyName.name.split.last
+#   email = Faker::Internet.email
+#   password = '1234567'
+#   User.create!(first_name: first_name,
+#                last_name: last_name,
+#                email: email,
+#                password: password,
+#                password_confirmation: password)
+# end
 
-TeamMember.create!(team_id: 1, user_id: 2, team_role: 2)
+# TeamMember.create!(team_id: 1, user_id: 2, team_role: 2)
