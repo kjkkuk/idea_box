@@ -10,15 +10,15 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    user.present?
   end
 
   def update?
-    true if user.present? && user == teams.user
+    user.present?
   end
 
   def destroy?
-    true if user.present? && user == teams.user
+    user.present?
   end
 
   private

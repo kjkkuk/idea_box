@@ -16,13 +16,13 @@ Role.find_or_create_by(role: :user)
 #   Team.find_or_create_by(team_name: Faker::Team.name)
 # end
 
-User.create!(first_name: 'Dima',
-             last_name: 'Yakutovich',
-             email: 'kjk.kuk@mail.ru',
-             password: '1234567',
-             password_confirmation: '1234567')
+# User.create!(first_name: 'Dima',
+#              last_name: 'Yakutovich',
+#              email: 'kjk.kuk@mail.ru',
+#              password: '1234567',
+#              password_confirmation: '1234567')
 
-# 99.times do
+# 10.times do
 #   first_name = Faker::FunnyName.name.split.first
 #   last_name = Faker::FunnyName.name.split.last
 #   email = Faker::Internet.email

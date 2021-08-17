@@ -22,3 +22,7 @@ $secondary-color: color("yellow", "base") !default;
 @import 'materialize';
 @import "nav";
 @import "devise";
+
+select {
+  display: block;
+}
