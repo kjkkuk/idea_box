@@ -53,10 +53,6 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:team_name)
   end
 
-  # def rescue_with_movie_not_found
-  #   render plain: 'Movie was not found', status: :not_found
-  # end
-
   def errors_messages
     flash[:error] = @team.errors.full_messages
   end
