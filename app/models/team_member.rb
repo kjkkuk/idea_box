@@ -12,8 +12,8 @@
 #  updated_at :datetime         not null
 #
 class TeamMember < ApplicationRecord
-  belongs_to :team, foreign_key: :teams_id
-  belongs_to :user, foreign_key: :users_id
+  belongs_to :team, foreign_key: :teams_id, inverse_of: :team_members
+  belongs_to :user, foreign_key: :users_id, inverse_of: :team_members
 
   # validate :validate
   validates :team_role, presence: true
@@ -25,8 +25,6 @@ class TeamMember < ApplicationRecord
   #     # record.errors.add(:base, 'A person cannot be a robot') if person_is_robot
   #   end
   # end
-
-  private
 
   # def user_creator
   #   a = object.team_member.where(user_id: current_user.id).first

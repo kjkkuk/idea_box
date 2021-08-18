@@ -2,7 +2,7 @@
 
 class TeamsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_team, only: %i[edit update destroy]
+  before_action :set_team, only: [:edit, :update, :destroy]
 
   def index
     @teams = Team.all
@@ -31,7 +31,8 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
-    @team.team_members << TeamMember.new(users_id: current_user.id, is_creator: true, team: @team, team_role: params[:team][:team_role])
+    @team.team_members << TeamMember.new(users_id: current_user.id, is_creator: true, team: @team,
+                                         team_role: params[:team][:team_role])
     if @team.save
       redirect_to @team
       flash[:notice] = "The #{@team.team_name} is created!"
@@ -39,7 +40,6 @@ class TeamsController < ApplicationController
       errors_messages
       render :new
     end
-
   end
 
   def destroy

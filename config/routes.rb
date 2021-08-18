@@ -8,13 +8,13 @@ Rails.application.routes.draw do
 
   root to: 'public#index'
 
-  resources :users, only: %i[index show edit update] do
+  resources :users, only: [:index, :show, :edit, :update] do
     # resources :activities, only: [:index]
     # resources :subscriptions, only: %i[index new create destroy]
   end
 
   resources :teams do
-
+    # resources
   end
 
   # resources :tags, only: [:show]

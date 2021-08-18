@@ -12,26 +12,25 @@
 
 
   </head>
+  <header>
+    <%= render "layouts/nav/public" %>
+  </header>
+    <div class="wrapper">
 
-  <body>
-    <header>
-      <%= render "layouts/nav/public" %>
-    </header>
 
-    <div class="container">
-      <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
-      <% end %>
+      <div class="container">
+        <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+        <%= yield %>
+      </div>
+
     </div>
-
-    <%= yield %>
-
-    <footer>
-      <%= render "layouts/footer" %>
-    </footer>
-
+  <footer class="footer">
+    <%= render "layouts/footer" %>
+  </footer>
   </body>
 </html>

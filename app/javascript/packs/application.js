@@ -14,4 +14,8 @@ import "jquery"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-//= require materialize
+// = require materialize
+
+$(document).on('turbolinks:load', function() {
+    $('.dropdown-trigger').dropdown();
+});
