@@ -1,21 +1,23 @@
 <nav class="light-blue lighten-1" role="navigation">
   <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">IDEA BOX</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="#">Navbar Link</a></li>
-    </ul>
+<!--    <ul class="right hide-on-med-and-down">-->
 
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-
-      <% if user_signed_in? %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete%>
-      <% else %>
-      <li>
-        <%= link_to "Log in", new_user_session_path %>
-      </li>
-      <li>
-        <%= link_to "Sign Up", new_user_registration_path %>
-      </li>
+<!--    </ul>-->
+    <ul id="dropdown1" class="dropdown-content">
+      <li><a href="#!">Profile</a></li>
+      <li><a href="#!">Settings</a></li>
+      <li class="divider"></li>
+      <li><% if user_signed_in? %>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete%>
+        <% else %>
+          <%= link_to "Log in", new_user_session_path %>
       <% end %>
+      </li>
+    </ul>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><%= link_to "Teams", teams_path %></li>
+      <li><a href='#'>Ideas</a></li>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
     <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
   </div>

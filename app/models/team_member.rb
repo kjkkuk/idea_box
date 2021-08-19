@@ -12,8 +12,10 @@
 #  updated_at :datetime         not null
 #
 class TeamMember < ApplicationRecord
-  belongs_to :team
-  belongs_to :user
+  belongs_to :team, foreign_key: :teams_id, inverse_of: :team_members
+  belongs_to :user, foreign_key: :users_id, inverse_of: :team_members
 
-  validates :role, presence: true
+  validates :team_role, presence: true
+
+  enum team_role: Team::ROLES
 end
