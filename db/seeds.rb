@@ -27,4 +27,6 @@ User.create!(first_name: 'Dima',
                password_confirmation: password)
 end
 
-# TeamMember.create!(team_id: 1, user_id: 2, team_role: 2)
+TeamMember.create!(teams_id: Team.all.each(&:id),
+                   users_id: User.all.each(&:id), team_role: Team::ROLES.sample,
+                   is_creator: false)

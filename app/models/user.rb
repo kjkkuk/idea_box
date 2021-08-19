@@ -25,15 +25,14 @@ class User < ApplicationRecord
 
   attr_accessor :auth, :current_user
 
-  validates :email, presence: true
   before_validation :set_default_role, on: [:create]
-  belongs_to :role
 
+  belongs_to :role
   has_many :authorizations, dependent: :destroy
-  has_many :team_members, dependent: :destroy
+  has_many :team_members, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
   has_many :teams, through: :team_members, dependent: :destroy
-  has_many :ideas, dependent: :destroy
-  has_many :feedbacks, dependent: :destroy
+  has_many :ideas, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
+  has_many :feedbacks, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
@@ -84,6 +83,6 @@ class User < ApplicationRecord
   private
 
   def set_default_role
-    self.role ||= Role.find_by(role: 'user')
+    self.role ||= Role.find_or_create_by(role: 'user')
   end
 end

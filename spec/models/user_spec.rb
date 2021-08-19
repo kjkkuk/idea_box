@@ -3,33 +3,26 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # pending "add some examples to (or delete) #{__FILE__}"
-  let(:user_my_module) { build :user_my_module }
+  subject(:user) { build(:user) }
 
-  it 'is valid' do
-    expect(user_my_module).to be_valid
-  end
-
-  # it 'is of class UserMyModule' do
-  #   expect(subject.class).to eq UserMyModule
-  # end
-
-  describe 'Database table' do
-    it { is_expected.to have_db_column :user_id }
-    it { is_expected.to have_db_column :my_module_id }
-    it { is_expected.to have_db_column :created_at }
-    it { is_expected.to have_db_column :updated_at }
-    it { is_expected.to have_db_column :assigned_by_id }
-  end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to :user }
-    it { is_expected.to belong_to :my_module }
-    it { is_expected.to belong_to(:assigned_by).class_name('User').optional }
+  describe 'Associations' do
+    it { is_expected.to have_many(:authorizations) }
+    it { is_expected.to have_many(:comments) }
+    it { is_expected.to have_many(:feedbacks) }
+    it { is_expected.to have_many(:teams) }
+    it { is_expected.to have_many(:team_members) }
+    it { is_expected.to have_many(:ideas) }
   end
 
   describe 'Validations' do
-    it { is_expected.to validate_presence_of :user }
-    it { is_expected.to validate_presence_of :my_module }
+    let(:valid_user) { build(:user) }
+
+    it { is_expected.to validate_presence_of(:first_name) }
+    it { is_expected.to validate_presence_of(:last_name) }
+    it { is_expected.to validate_presence_of(:email) }
+
+    it 'is valid with a name, email, password' do
+      expect(valid_user).to be_valid
+    end
   end
 end

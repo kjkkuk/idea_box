@@ -50,7 +50,7 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:team_name)
+    params.permit(:team_name)
   end
 
   def errors_messages

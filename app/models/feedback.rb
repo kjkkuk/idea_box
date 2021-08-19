@@ -14,7 +14,7 @@
 #  updated_at :datetime         not null
 #
 class Feedback < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, foreign_key: :users_id, inverse_of: :feedbacks
   belongs_to :idea
 
   validates :like, :dislike, presence: true
