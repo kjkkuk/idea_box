@@ -33,6 +33,7 @@ Rails/HttpPositionalArguments:
 
 Metrics/BlockLength:
   Exclude:
+    - "./db/seeds.rb"
     - lib/**/*.rake
     - test/**/*
     - spec/**/*
