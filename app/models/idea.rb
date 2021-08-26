@@ -20,10 +20,10 @@
 class Idea < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
-  belongs_to :user, foreign_key: :users_id, class_name: 'Idea', inverse_of: :user
-  belongs_to :team
+  belongs_to :user, inverse_of: :ideas, foreign_key: :users_id
+  belongs_to :team, inverse_of: :ideas, foreign_key: :teams_id
 
-  validates :idea_name, :problem, :need, :geo, :industry, presence: true, length: { maximum: 50 }
-  validates :idea_description, presence: true, length: { maximum: 300 }
+  validates :idea_name, :need, :geo, :industry, presence: true, length: { maximum: 50 }
+  validates :idea_description, :problem, presence: true, length: { maximum: 300 }
   validates :visible, inclusion: { in: [true, false] }
 end

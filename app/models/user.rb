@@ -31,7 +31,7 @@ class User < ApplicationRecord
   has_many :authorizations, dependent: :destroy
   has_many :team_members, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
   has_many :teams, through: :team_members, dependent: :destroy
-  has_many :ideas, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
+  has_many :ideas, dependent: :destroy, inverse_of: :user, foreign_key: :users_id
   has_many :feedbacks, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
   has_many :comments, as: :commentable, dependent: :destroy
 

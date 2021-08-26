@@ -3,10 +3,18 @@
 require 'faker'
 
 ActiveRecord::Base.transaction do
+  if ENV['CLEAR_SEEDS']
+    Idea.delete_all
+    TeamMember.delete_all
+    Team.delete_all
+    User.delete_all
+    Role.delete_all
+  end
+
   Role.find_or_create_by(role: :admin)
   Role.find_or_create_by(role: :user)
 
-  10.times do
+  20.times do
     Team.find_or_create_by(team_name: Faker::Team.name)
   end
 
@@ -16,7 +24,7 @@ ActiveRecord::Base.transaction do
                password: '1234567',
                password_confirmation: '1234567')
 
-  10.times do
+  20.times do
     first_name = Faker::FunnyName.name.split.first
     last_name = Faker::FunnyName.name.split.last
     email = Faker::Internet.email
@@ -45,6 +53,17 @@ ActiveRecord::Base.transaction do
                          teams_id: team.id,
                          users_id: User.all.ids.sample,
                          is_creator: false)
+    end
+    3.times do
+      Idea.create!(idea_name: Faker::Music.band,
+                   idea_description: Faker::Movies::Lebowski.quote,
+                   need: Idea::NEED.sample,
+                   geo: Idea::GEO.sample,
+                   problem: Faker::Games::Dota.quote,
+                   industry: Idea::INDUSTRY.sample,
+                   visible: true,
+                   team: team,
+                   user: User.all.sample)
     end
   end
 end
