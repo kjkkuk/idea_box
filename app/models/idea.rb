@@ -26,4 +26,23 @@ class Idea < ApplicationRecord
   validates :idea_name, :need, :geo, :industry, presence: true, length: { maximum: 50 }
   validates :idea_description, :problem, presence: true, length: { maximum: 300 }
   validates :visible, inclusion: { in: [true, false] }
+
+  INDUSTRY = %w(Art
+                Comics
+                Crafts
+                Dance
+                Design
+                Film&Video
+                Food
+                Games
+                Journalism
+                Music
+                Photography
+                Publishing
+                Technology
+                Theater).freeze
+
+  GEO = ['Asia', 'Europe', 'Africa', 'Australia', 'North America', 'South America', 'Global'].freeze
+
+  NEED = ['funding', 'mentoring', 'marketing strategy'].freeze
 end

@@ -3,3 +3,24 @@
     <%= @team.team_name%>
   </h1>
 </main>
+
+<body>
+  <table class="table table-bordered table-hover">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Role</th>
+      <th scope="col" style="width: 5%"></th>
+    </tr>
+    </thead>
+        <% @team.team_members.each do |team| %>
+          <tr>
+          <td><%= team.user.first_name %>
+            <%= team.user.last_name %></td>
+          <td><%= team.team_role %></td><br>
+      </tr>
+    <%end %>
+  </table>
+
+
+</body>

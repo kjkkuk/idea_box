@@ -66,4 +66,13 @@ ActiveRecord::Base.transaction do
                    user: User.all.sample)
     end
   end
+
+  User.all.each do |user|
+    Idea.all.each do |idea|
+      Feedback.create!(reaction: true,
+                       users_id: user,
+                       ideas_id: idea,
+                       rating: (1..5).rand)
+    end
+  end
 end

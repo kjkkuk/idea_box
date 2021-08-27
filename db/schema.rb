@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_16_124728) do
+ActiveRecord::Schema.define(version: 2021_08_26_160630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,13 +38,12 @@ ActiveRecord::Schema.define(version: 2021_08_16_124728) do
   end
 
   create_table "feedbacks", force: :cascade do |t|
-    t.integer "dislike", null: false
-    t.integer "like", null: false
-    t.float "rating", null: false
+    t.integer "rating", null: false
     t.bigint "users_id"
     t.bigint "ideas_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "reaction"
     t.index ["ideas_id"], name: "index_feedbacks_on_ideas_id"
     t.index ["users_id"], name: "index_feedbacks_on_users_id"
   end
