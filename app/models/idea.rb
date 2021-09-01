@@ -18,7 +18,7 @@
 #  updated_at       :datetime         not null
 #
 class Idea < ApplicationRecord
-  has_many :comments, dependent: :destroy
+  has_many :feedbacks, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :user, inverse_of: :ideas, foreign_key: :users_id
   belongs_to :team, inverse_of: :ideas, foreign_key: :teams_id
