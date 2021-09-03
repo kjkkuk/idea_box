@@ -15,4 +15,8 @@ Rails.application.routes.draw do
   resources :teams do
     # resources :activities, only: [:index]
   end
+
+  resources :ideas do
+    # resources :activities, only: [:index]
+  end
 end
