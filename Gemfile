@@ -38,6 +38,8 @@ gem 'cancancan', '~>3.3.0'
 # add comments
 gem 'annotate', '~>3.1.1'
 
+gem 'paper_trail', '~>12.1.0'
+
 gem 'lefthook', '~>0.7.6'
 
 gem 'dotenv-rails', '~>2.7.6'
