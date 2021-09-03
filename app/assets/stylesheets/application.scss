@@ -28,13 +28,16 @@ select {
 }
 
 body {
-  display: flex;
   min-height: 100vh;
-  flex-direction: column;
 }
 
 main {
   flex: 1 0 auto;
+
+  h1 {
+    padding-top: 40px;
+    margin-top: 0;
+  }
 }
 
 .wrapper {
@@ -48,10 +51,16 @@ main {
 }
 
 .row-registarion{
+  padding-top: 60px;
   max-width: 90%;
 }
 .row {
 }
+
+.col-team_members {
+
+}
+
 .content {
   padding-bottom: 90px;
 }
@@ -61,6 +70,8 @@ main {
   width: 100%;
 }
 header {
+  position: relative;
+  z-index: 2;
   height: auto;
   min-height: 64px;
 }
