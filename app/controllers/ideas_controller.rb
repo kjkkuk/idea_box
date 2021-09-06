@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
   def edit; end
 
   def update
-    if @idea.update(team_params)
+    if @idea.update(idea_params)
       redirect_to action: :index
       flash[:notice] = 'Update idea!'
     else
@@ -33,16 +33,23 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
     # @team.team_members << TeamMember.new(users_id: current_user.id, is_creator: true, team: @team,
     #                                      team_role: params[:team][:team_role])
-    # if @team.save
-    #   redirect_to @team
-    #   flash[:notice] = "The #{@team.team_name} is created!"
-    # else
-    #   errors_messages
-    #   render :new
-    # end
+    @idea.user = current_user
+    if @idea.save
+      redirect_to @idea
+      flash[:notice] = "The #{@idea.idea_name} is created!"
+    else
+      errors_messages
+      render :new
+    end
   end
 
+  private
+
   def idea_params
-    params.permit(:idea_name)
+    params.require(:idea).permit(:idea_name, :idea_description, :need, :problem, :geo, :industry)
+  end
+
+  def errors_messages
+    flash[:error] = @idea.errors.full_messages
   end
 end

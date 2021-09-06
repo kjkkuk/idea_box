@@ -44,5 +44,5 @@ class Idea < ApplicationRecord
 
   GEO = ['Asia', 'Europe', 'Africa', 'Australia', 'North America', 'South America', 'Global'].freeze
 
-  NEED = ['Funding', 'Mentoring', 'Marketing strategy'].freeze
+  NEED = ['Funding', 'Mentoring', 'Marketing strategy', 'Team members'].freeze
 end
