@@ -21,7 +21,7 @@ class Idea < ApplicationRecord
   has_many :feedbacks, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :user, inverse_of: :ideas, foreign_key: :users_id
-  belongs_to :team, inverse_of: :ideas, foreign_key: :teams_id
+  belongs_to :team, inverse_of: :ideas, foreign_key: :teams_id, optional: true
 
   validates :idea_name, :need, :geo, :industry, presence: true, length: { maximum: 50 }
   validates :idea_description, :problem, presence: true, length: { maximum: 300 }

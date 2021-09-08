@@ -19,3 +19,14 @@ ActiveStorage.start()
 $(document).on('turbolinks:load', function() {
     $('.dropdown-trigger').dropdown();
 });
+
+// $('input[type=radio][name=team_button]').change(function () {
+//     // first: hide all the divs
+//     $('#team_button').css("display","none");
+//     // $('#calendar_details_b2b').css("display","none");
+//
+//     // then get the div ID to show (i stored it in the "value" of the radio button
+//     const fieldToShow = $(this).val();
+//     // now use jQuery selector and change the display setting of that field
+//     $("#" + fieldToShow).css("display","block");
+// });

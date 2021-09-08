@@ -79,3 +79,8 @@ header {
 .page-footer {
   padding-top: 0px;
 }
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+  position: relative;
+  opacity: 1;
+}

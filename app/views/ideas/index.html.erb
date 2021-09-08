@@ -9,13 +9,22 @@
     <div class="col s12 m10 offset-m1 l9 offset-l1">
       <div class="post-preview">
         <h4 class="post-title titleFont">
-          <% @ideas.each do |record| %>
+          <% @ideas.order(id: :desc).each do |record| %>
             <tr>
               <td style="width: 5%"></td>
               <td><%= link_to record.idea_name, idea_path(record), method: :get %></td>
               <td style="width: 5%">
+                <% if policy(record).destroy? %>
+                  <%= link_to "Destroy", idea_path(record),
+                              method: :delete,
+                              data: { confirm: "Are you sure?" },
+                              class: 'btn btn-outline-danger' %>
+                <% end %>
               </td>
               <td style="width: 5%">
+                <% if policy(record).update? %>
+                  <%= link_to "Edit", edit_idea_path(record), class: 'btn btn-primary' %>
+                <% end %>
               </td>
             </tr>
           <% end %>
