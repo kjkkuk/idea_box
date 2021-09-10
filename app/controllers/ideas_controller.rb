@@ -63,8 +63,12 @@ class IdeasController < ApplicationController
   def destroy
     @idea = Idea.find(params[:id])
     authorize @idea
-    @idea.destroy
-    redirect_to teams_path(@idea)
+    if @idea.destroy
+      redirect_to @idea
+      flash[:notice] = "The #{@idea.idea_name} is deleted!"
+    else
+      errors_messages
+    end
   end
 
   private
