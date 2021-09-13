@@ -10,11 +10,11 @@ class IdeasController < ApplicationController
 
   def new
     @idea = Idea.new
-    special_users = TeamMember.where(is_creator: true, users_id: current_user.id).map do |p|
-      [p.team.team_name,
-       p.team.id]
+    special_users = TeamMember.where(is_creator: true, users_id: current_user.id).map do |team_member|
+      [team_member.team.team_name,
+       team_member.team.id]
     end
-    @team_of_user = special_users.insert(0, ['none', nil])
+    @possible_teams = special_users.insert(0, ['none', nil])
   end
 
   def show
