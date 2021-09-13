@@ -2,7 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Ideas', type: :controller do
+RSpec.describe IdeasController, type: :controller do
+  let(:user) { create(:user) }
+  let!(:idea) { create(:idea) }
+  let(:valid_attributes) { FactoryBot.attributes_for(:idea) }
+
   describe 'index' do
     it 'assigns all ideas as @@ideas' do
       get :index
