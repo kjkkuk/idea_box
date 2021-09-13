@@ -8,11 +8,7 @@ Rails.application.routes.draw do
 
   root to: 'public#index'
 
-  resources :users, only: [:index, :show, :edit, :update] do
-    # resources :activities, only: [:index]
-  end
-
-  resources :teams do
-    # resources :activities, only: [:index]
-  end
+  resources :users
+  resources :teams
+  resources :ideas
 end

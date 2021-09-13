@@ -18,10 +18,10 @@
 #  updated_at       :datetime         not null
 #
 class Idea < ApplicationRecord
-  has_many :feedbacks, dependent: :destroy
+  has_many :feedbacks, dependent: :destroy, foreign_key: :ideas_id, inverse_of: :idea
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :user, inverse_of: :ideas, foreign_key: :users_id
-  belongs_to :team, inverse_of: :ideas, foreign_key: :teams_id
+  belongs_to :team, inverse_of: :ideas, foreign_key: :teams_id, optional: true
 
   validates :idea_name, :need, :geo, :industry, presence: true, length: { maximum: 50 }
   validates :idea_description, :problem, presence: true, length: { maximum: 300 }
@@ -44,5 +44,5 @@ class Idea < ApplicationRecord
 
   GEO = ['Asia', 'Europe', 'Africa', 'Australia', 'North America', 'South America', 'Global'].freeze
 
-  NEED = ['funding', 'mentoring', 'marketing strategy'].freeze
+  NEED = ['Funding', 'Mentoring', 'Marketing strategy', 'Team members'].freeze
 end
