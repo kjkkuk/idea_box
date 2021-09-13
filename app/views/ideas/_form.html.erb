@@ -30,45 +30,11 @@
     <%= form.text_field :problem, class: "form-control"%>
   </div>
 
-<!--  <div>-->
-<!--    <%#= form.label :Creator %><br />-->
-<!--    <p>-->
-<!--      <label>-->
-<!--        <input class="with-gap" name="group3" type="radio" value="Own"/>-->
-<!--        <span>Own</span>-->
-<!--      </label>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--      <label>-->
-<!--        <input class="with-gap" name="group3" type="radio" value="Team"/>-->
-<!--        <span>Team</span>-->
-<!--      </label>-->
-<!--    </p>-->
-<!--  </div>-->
-
-
-<!--  <script type="text/javascript">-->
-<!--      $(document).on('turbolinks:load', function() {-->
-<!--          $('input[type="radio"]').click(function() {-->
-<!--              const inputValue = $(this).attr("value");-->
-<!--              const targetBox = $("." + inputValue);-->
-<!--              $(".Team").not(targetBox).hide();-->
-<!--              $(targetBox).show();-->
-<!--          });-->
-<!--      });-->
-<!--  </script>-->
-
-<!--  <div id="radio_buttons">-->
-    <%#= radio_button_tag 'exp', 1 %>
-    <%#= radio_button_tag 'exp', 2 %>
-<!--  </div>-->
-
-  <%#= link_to_remote 'Submit now', :url => {:action=>"do"}, :submit => 'radio_buttons' %>
-
   <div class="form-group">
     <%= form.label :Team%>
     <%= form.select :teams_id, TeamMember.where(
       is_creator: true, users_id: current_user.id).collect {|p| [p.team.team_name, p.team.id]}.insert(0, ['none',nil]) %>
+    <%= form.hidden_field :visible, :value => true %>
   </div>
 
   <div class="actions">

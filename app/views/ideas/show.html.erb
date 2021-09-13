@@ -1,19 +1,20 @@
 <main>
-  <h1 style="color: green;">
-    <%= @idea.idea_name%>
-  </h1>
-  <h4><%= @idea.idea_description %></h4>
-  <div class="row">
-    <div class="col s6">
-      <div class="row">
-        <div class="col s10">
-          <p>Industry: <%= @idea.industry %></p>
-          <p>Location: <%= @idea.geo %></p>
-          <p>Problem: <%= @idea.problem %></p>
-          <p>Need: <%= @idea.problem %></p>
+  <% if @idea.visible %>
+    <h1 style="color: green;">
+      <%= @idea.idea_name%>
+    </h1>
+    <h4><%= @idea.idea_description %></h4>
+    <div class="row">
+      <div class="col s6">
+        <div class="row">
+          <div class="col s10">
+            <p>Industry: <%= @idea.industry %></p>
+            <p>Location: <%= @idea.geo %></p>
+            <p>Problem: <%= @idea.problem %></p>
+            <p>Need: <%= @idea.problem %></p>
+          </div>
         </div>
       </div>
-    </div>
       <div class="col s6">
         <%if @idea.team %>
           <table>
@@ -39,6 +40,7 @@
       <div class="col s4">
         <p>Owner: <%= @idea.user.first_name%> <%=@idea.user.last_name %></p>
       </div>
+      </div>
     </div>
-  </div>
+  <%end %>
 </main>
