@@ -9,6 +9,8 @@
 
 .idea/
 
+.DS_Store
+
 .env
 
 .ruby-version

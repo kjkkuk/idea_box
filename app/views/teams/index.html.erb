@@ -11,18 +11,18 @@
         <h4 class="post-title titleFont">
           <% @teams.each do |record| %>
             <tr>
-              <td style="width: 5%"></td>
+              <td class="table-row"></td>
               <td><%= link_to record.team_name, team_path(record), method: :get %></td>
-              <td style="width: 5%">
-                <% if policy(record).destroy? %>
+              <td class="table-row">
+              <% if policy(record).destroy? %>
                 <%= link_to "Destroy", team_path(record),
                               method: :delete,
                               data: { confirm: "Are you sure?" },
                               class: 'btn btn-outline-danger' %>
                 <% end %>
               </td>
-              <td style="width: 5%">
-                <% if policy(record).update? %>
+              <td class="table-row">
+              <% if policy(record).update? %>
                 <%= link_to "Edit", edit_team_path(record), class: 'btn btn-primary' %>
               <% end %>
               </td>
