@@ -20,10 +20,4 @@ class TeamPolicy < ApplicationPolicy
   def destroy?
     user.present?
   end
-
-  private
-
-  def teams
-    record
-  end
 end

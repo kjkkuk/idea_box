@@ -2,7 +2,7 @@
 
 class IdeasController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_team, only: [:edit, :update]
+  before_action :set_idea, only: [:edit, :update]
 
   def index
     @ideas = Idea.all
@@ -10,6 +10,11 @@ class IdeasController < ApplicationController
 
   def new
     @idea = Idea.new
+    special_users = TeamMember.where(is_creator: true, users_id: current_user.id).map do |p|
+      [p.team.team_name,
+       p.team.id]
+    end
+    @team_of_user = special_users.insert(0, ['none', nil])
   end
 
   def show
@@ -60,5 +65,9 @@ class IdeasController < ApplicationController
 
   def errors_messages
     flash[:error] = @idea.errors.full_messages
+  end
+
+  def set_idea
+    @idea = Idea.find(params[:id])
   end
 end

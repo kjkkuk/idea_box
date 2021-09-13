@@ -11,17 +11,17 @@
 
   <div class="form-group">
     <%= form.label :need %>
-    <%= form.select :need, options_for_select(Idea::NEED), {}%>
+    <%= form.select :need, options_for_select(Idea::NEED)%>
   </div>
 
   <div class="form-group">
     <%= form.label "Location" %>
-    <%= form.select :geo, options_for_select(Idea::GEO), {}%>
+    <%= form.select :geo, options_for_select(Idea::GEO)%>
   </div>
 
   <div class="form-group">
     <%= form.label :industry %>
-    <%= form.select :industry, options_for_select(Idea::INDUSTRY), {}%>
+    <%= form.select :industry, options_for_select(Idea::INDUSTRY)%>
   </div>
 
 
@@ -32,15 +32,14 @@
 
   <div class="form-group">
     <%= form.label :Team%>
-    <%= form.select :teams_id, TeamMember.where(
-      is_creator: true, users_id: current_user.id).collect {|p| [p.team.team_name, p.team.id]}.insert(0, ['none',nil]) %>
+    <%= form.select :teams_id, @team_of_user%>
     <%= form.hidden_field :visible, :value => true %>
   </div>
 
   <div class="actions">
     <br>
     <%= form.submit 'Create idea', class: 'btn btn-outline-primary'%>
-    <%= form.submit "Save as Draft", :name => "draft", class: 'btn btn-outline-secondary'%>
+    <%= form.submit "Save as Draft", class: 'btn btn-outline-secondary'%>
     <%= link_to 'Back', :back, class: 'btn btn-outline-secondary'%>
   </div>
 
