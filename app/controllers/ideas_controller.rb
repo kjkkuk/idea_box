@@ -37,7 +37,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(idea_params)
     @idea.user = current_user
-    if @idea.save && @idea.visible
+    if @idea.save
       redirect_to @idea
       flash[:notice] = "The #{@idea.idea_name} is created!"
     else

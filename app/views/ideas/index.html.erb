@@ -10,9 +10,18 @@
       <div class="post-preview">
         <h4 class="post-title titleFont">
           <% @ideas.order(id: :desc).each do |record| %>
-            <% if record.visible %>
-              <tr>
-                <td><%= link_to record.idea_name, idea_path(record), method: :get %></td>
+            <tr>
+                <td>
+                  <%= link_to record.idea_name, idea_path(record), method: :get %>
+                </td>
+
+              <% if record.users_id == current_user.id %>
+                <td>
+                  <% unless record.visible %>
+                      [draft]
+                  <% end %>
+                </td>
+
                 <td class="table-row">
                   <% if policy(record).destroy? %>
                     <%= link_to "Destroy", idea_path(record),
@@ -21,13 +30,14 @@
                                 class: 'btn btn-outline-danger' %>
                   <% end %>
                 </td>
+
                 <td class="table-row">
-                <% if policy(record).update? %>
+                  <% if policy(record).update? %>
                     <%= link_to "Edit", edit_idea_path(record), class: 'btn btn-primary' %>
                   <% end %>
                 </td>
-              </tr>
-            <% end %>
+              <% end %>
+            </tr>
           <%end %>
         </h4>
       </div>
