@@ -87,3 +87,9 @@ header {
 .head-name {
   color: green;
 }
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+}
