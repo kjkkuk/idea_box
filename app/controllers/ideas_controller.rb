@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
   before_action :set_idea, only: [:edit, :update]
 
   def index
-    @ideas = Idea.all
+    @ideas = Idea.order(created_at: :desc)
   end
 
   def new
@@ -41,8 +41,8 @@ class IdeasController < ApplicationController
       redirect_to @idea
       flash[:notice] = "The #{@idea.idea_name} is created!"
     else
+      redirect_to action: :index
       errors_messages
-      render :new
     end
   end
 

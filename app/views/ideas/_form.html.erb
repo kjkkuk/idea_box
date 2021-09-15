@@ -33,13 +33,14 @@
   <div class="form-group">
     <%= form.label :Team%>
     <%= form.select :teams_id, @possible_teams%>
-    <%= form.hidden_field :visible, :value => true %>
   </div>
+
+  <%= form.check_box :visible, {class: 'visible-checkbox'}, false, true%>
+  <%= form.label "Save as Draft", for:"visible-checkbox", class: "visible-checkbox" %>
 
   <div class="actions">
     <br>
     <%= form.submit 'Create idea', class: 'btn btn-outline-primary'%>
-    <%= form.submit "Save as Draft", class: 'btn btn-outline-secondary'%>
     <%= link_to 'Back', :back, class: 'btn btn-outline-secondary'%>
   </div>
 
