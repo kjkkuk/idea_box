@@ -5,7 +5,7 @@ class IdeasController < ApplicationController
   before_action :set_idea, only: [:edit, :update]
 
   def index
-    @ideas = Idea.all
+    @ideas = Idea.order(created_at: :desc)
   end
 
   def new
