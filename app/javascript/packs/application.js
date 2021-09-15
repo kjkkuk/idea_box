@@ -19,3 +19,13 @@ ActiveStorage.start()
 $(document).on('turbolinks:load', function() {
     $('.dropdown-trigger').dropdown();
 });
+
+$( document ).ready('turbolinks:load', function() {
+    $("#checkBox_id").click(function() {
+        const checkbox = document.querySelector('checkbox');
+        const inputs = document.querySelectorAll('checkbook > input[type="text"]');
+        for (let input of inputs) {
+            input.disabled = checkbox.checked;
+        }
+    });
+});

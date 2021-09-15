@@ -5,13 +5,19 @@ class UsersController < ApplicationController
   before_action :validate_authorization_for_user, only: [:edit, :update]
 
   # GET /users/1
-  def show; end
-
-  # GET /users/1/edit
-  def edit; end
-
   def index
     @users = User.all
+    authorize @users
+  end
+
+  def show
+    @user = User.find(params[:id])
+    authorize @user
+  end
+
+  def edit
+    @user = User.find(params[:id])
+    authorize @user
   end
 
   # PATCH/PUT /users/1
