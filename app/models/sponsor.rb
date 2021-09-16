@@ -12,7 +12,7 @@
 #  updated_at  :datetime         not null
 #
 class Sponsor < ApplicationRecord
-  belongs_to :user
+  has_one :user, dependent: :nullify
 
   validates :opportunity, :geo, :industry, presence: true, length: { maximum: 50 }
 end

@@ -18,10 +18,12 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     authorize @user
+    @user.sponsor ||= Sponsor.new
   end
 
   # PATCH/PUT /users/1
   def update
+    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :password)
+    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :is_sponsor, :password,
+                                 sponsor_attributes: [:industry, :geo, :opportunity, :id])
   end
 end

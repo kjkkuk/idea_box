@@ -17,28 +17,33 @@
     <%= render 'users/error', user: user, field: :email %>
   </div>
 
-  <%= form.check_box :sponsor, {class: 'visible-checkbox'}%>
-  <%= form.label "Sponsor", for:"visible-checkbox", class: "visible-checkbox" %>
+    <%= form.check_box :is_sponsor, class: 'visible-checkbox' %>
+    <%= form.label "Sponsor", for:"visible-checkbox", class: "visible-checkbox" %>
 
-  <div class="form-group">
-    <%= form.label "Location" %>
-    <%= form.select :geo, options_for_select(Idea::GEO)%>
-  </div>
+  <%= form.fields_for :sponsor do |ff| %>
 
-  <div class="form-group">
-    <%= form.label :industry %>
-    <%= form.select :industry, options_for_select(Idea::INDUSTRY)%>
-  </div>
+    <div class="form-group-1">
+      <%= ff.label "Location" %>
+      <%= ff.select :geo, options_for_select(Idea::GEO, selected: @user.geo), { :class => 'select-form-user' }%>
+    </div>
 
-  <div class="form-group">
-    <%= form.label :opportunity %>
-    <%= form.select :opportunity, options_for_select(Idea::NEED)%>
-  </div>
+    <div class="form-group-1">
+      <%= ff.label :industry %>
+      <%= ff.select :industry, options_for_select(Idea::INDUSTRY)%>
+    </div>
+
+    <div class="form-group-1">
+      <%= ff.label :opportunity %>
+      <%= ff.select :opportunity, options_for_select(Idea::NEED)%>
+    </div>
+
+  <% end %>
+
+
 
   <div>
     <%= form.submit 'Update profile', class: 'btn btn-outline-primary' %>
     <%= link_to 'Back', :back, class: 'btn btn-outline-secondary' %>
   </div>
-
 
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_02_102222) do
+ActiveRecord::Schema.define(version: 2021_09_16_104302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,9 +106,11 @@ ActiveRecord::Schema.define(version: 2021_09_02_102222) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.bigint "sponsor_id"
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
+    t.index ["sponsor_id"], name: "index_users_on_sponsor_id"
   end
 
   create_table "versions", force: :cascade do |t|
@@ -130,4 +132,5 @@ ActiveRecord::Schema.define(version: 2021_09_02_102222) do
   add_foreign_key "team_members", "teams", column: "teams_id"
   add_foreign_key "team_members", "users", column: "users_id"
   add_foreign_key "users", "roles"
+  add_foreign_key "users", "sponsors"
 end

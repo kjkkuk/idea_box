@@ -15,6 +15,7 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
+#  sponsor_id             :bigint
 #
 FactoryBot.define do
   factory :user do
