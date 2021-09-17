@@ -15,6 +15,7 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
+#  sponsor_id             :bigint
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -24,6 +25,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook, :github, :google_oauth2, :linkedin]
 
   attr_accessor :auth, :current_user
+  attr_writer :sponsor_profile_exists
 
   before_validation :set_default_role, on: [:create]
 
@@ -34,10 +36,17 @@ class User < ApplicationRecord
   has_many :ideas, dependent: :destroy, inverse_of: :user, foreign_key: :users_id
   has_many :feedbacks, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
   has_many :comments, as: :commentable, dependent: :destroy
+  belongs_to :sponsor
 
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 250 }, format: { with: VALID_EMAIL_REGEX }
+
+  accepts_nested_attributes_for :sponsor
+
+  def sponsor_profile_exists
+    !!sponsor_id
+  end
 
   def self.create_user
     @auth = request.env['omniauth.auth']
