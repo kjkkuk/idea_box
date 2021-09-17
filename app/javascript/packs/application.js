@@ -20,23 +20,14 @@ $(document).on('turbolinks:load', function() {
     $('.dropdown-trigger').dropdown();
 });
 
-// $( document ).ready('turbolinks:load', function() {
-//     $("#checkBox_id").click(function() {
-//         const checkbox = document.querySelector('checkbox');
-//         const inputs = document.querySelectorAll('checkbook > input[type="text"]');
-//         for (let input of inputs) {
-//             input.disabled = checkbox.checked;
-//         }
-//     });
-// });
-
 $(document).on('turbolinks:load', function() {
     const checkbox = document.querySelector('.visible-checkbox');
     const selectors = document.querySelectorAll('.visible-checkbox ~ .form-group-1 select');
-
-    checkbox.addEventListener('click', e => {
-        for (let selector of selectors) {
-            selector.disabled = !e.target.checked;
-        }
-    });
+    if (checkbox) {
+        checkbox.addEventListener('change', e => {
+            for (let selector of selectors) {
+                selector.disabled = !e.target.checked;
+            }
+        });
+    }
 });

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def index
-    @users = User.all
+    @users = User.order(created_at: :desc)
     authorize @users
   end
 
@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      @user.sponsor.destroy! if !user_params[:sponsor_profile_exist] && @user.sponsor_id
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render action: 'edit'
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :is_sponsor, :password,
+    params.require(:user).permit(:first_name, :last_name, :email, :role_id, :sponsor_profile_exist, :password,
                                  sponsor_attributes: [:industry, :geo, :opportunity, :id])
   end
 end
