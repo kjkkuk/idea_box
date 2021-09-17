@@ -25,7 +25,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook, :github, :google_oauth2, :linkedin]
 
   attr_accessor :auth, :current_user
-  attr_writer :sponsor_profile_exist
+  attr_writer :sponsor_profile_exists
 
   before_validation :set_default_role, on: [:create]
 
@@ -44,7 +44,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :sponsor
 
-  def sponsor_profile_exist
+  def sponsor_profile_exists
     !!sponsor_id
   end
 

@@ -10,12 +10,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user&.id == pundit_user.id
-  end
-
-  private
-
-  def pundit_user
-    record
+    user&.id == record.id
   end
 end

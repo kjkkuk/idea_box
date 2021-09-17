@@ -21,12 +21,12 @@ $(document).on('turbolinks:load', function() {
 });
 
 $(document).on('turbolinks:load', function() {
-    const checkbox = document.querySelector('.visible-checkbox');
-    const selectors = document.querySelectorAll('.visible-checkbox ~ .form-group-1 select');
+    const checkbox = document.querySelector('.checkbox-sponsor');
+    const selectors = document.querySelectorAll('.checkbox-sponsor ~ .form-group-for-disable select');
     if (checkbox) {
-        checkbox.addEventListener('change', e => {
+        checkbox.addEventListener('change', event => {
             for (let selector of selectors) {
-                selector.disabled = !e.target.checked;
+                selector.disabled = !event.target.checked;
             }
         });
     }

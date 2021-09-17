@@ -1,13 +1,23 @@
-<h1>Users</h1>
+<body>
+<main>
+  <h1>Users</h1>
+</main>
 
-<div class="row row-cols-1 row-cols-md-5">
-  <% @users.each do |user| %>
-    <div class="col mb-4">
-      <div class="card border-dark h-100">
-        <div class="card-body">
-          <p class="card-text"><%=link_to user.first_name, user %> <%= link_to user.last_name, user  %></p>
-        </div>
+<div class="row">
+  <table class="table table-bordered table-hover">
+      <div class="post-preview">
+        <h4 class="post-title titleFont">
+          <% @users.each do |user| %>
+            <tr>
+              <td class="table-row"></td>
+              <td><%=link_to user.first_name, user %> <%= link_to user.last_name, user %></td>
+              </td>
+            </tr>
+          <% end %>
+        </h4>
       </div>
-    </div>
-  <% end %>
+      <hr>
+  </table>
 </div>
+</div>
+</body>
