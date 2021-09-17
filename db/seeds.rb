@@ -2,55 +2,77 @@
 
 require 'faker'
 
-# Role.find_or_create_by(role: :admin)
-# Role.find_or_create_by(role: :user)
-#
-# 15.times do
-#   Team.find_or_create_by(team_name: Faker::Team.name)
-# end
-#
-# User.create!(first_name: 'Dima',
-#              last_name: 'Yakutovich',
-#              email: 'kjk.kuk@mail.ru',
-#              password: '1234567',
-#              password_confirmation: '1234567')
-#
-# 10.times do
-#   first_name = Faker::FunnyName.name.split.first
-#   last_name = Faker::FunnyName.name.split.last
-#   email = Faker::Internet.email
-#   password = '1234567'
-#   User.create!(first_name: first_name,
-#                last_name: last_name,
-#                email: email,
-#                password: password,
-#                password_confirmation: password)
-# end
+ActiveRecord::Base.transaction do
+  if ENV['CLEAR_SEEDS']
+    Idea.delete_all
+    TeamMember.delete_all
+    Team.delete_all
+    User.delete_all
+    Role.delete_all
+  end
 
-# 10.times do
-#   p team = TeamMember.where(is_creator: true)[teams_id:]
-# # p TeamMember.where().create!(teams_id: team,
-# #                                              users_id: !User.exists?,
-# #                                              team_role: )
-# end
-TeamMember.create!([
-                     { teams_id: 16, users_id: 2, team_role: 1, is_creator: false },
-                     { teams_id: 16, users_id: 3, team_role: 3, is_creator: false },
-                     { teams_id: 17, users_id: 4, team_role: 1, is_creator: false },
-                     { teams_id: 17, users_id: 5, team_role: 2, is_creator: false },
-                     { teams_id: 17, users_id: 6, team_role: 3, is_creator: false },
-                     { teams_id: 18, users_id: 7, team_role: 1, is_creator: false },
-                     { teams_id: 18, users_id: 8, team_role: 2, is_creator: false },
-                     { teams_id: 18, users_id: 9, team_role: 3, is_creator: false },
-                     { teams_id: 22, users_id: 10, team_role: 1, is_creator: false },
-                     { teams_id: 22, users_id: 11, team_role: 2, is_creator: false },
-                     { teams_id: 22, users_id: 2, team_role: 3, is_creator: false }
-                   ])
+  Role.find_or_create_by(role: :admin)
+  Role.find_or_create_by(role: :user)
 
-# TeamMember.create!(teams_id)
+  20.times do
+    Team.find_or_create_by(team_name: Faker::Team.name)
+  end
 
-# p User.all.each(&:id)
-# p Team::ROLES.index.sample
-# TeamMember.create!(teams_id: Team.all.each(&:id),
-#                    users_id: User.all.each(&:id), team_role: index(Team::ROLES).sample,
-#                    is_creator: false)
+  User.create!(first_name: 'Dima',
+               last_name: 'Yakutovich',
+               email: 'kjk.kuk@mail.ru',
+               password: '1234567',
+               password_confirmation: '1234567')
+
+  20.times do
+    first_name = Faker::FunnyName.name.split.first
+    last_name = Faker::FunnyName.name.split.last
+    email = Faker::Internet.email
+    password = '1234567'
+    User.create!(first_name: first_name,
+                 last_name: last_name,
+                 email: email,
+                 password: password,
+                 password_confirmation: password)
+  end
+
+  not_exist_team = Team.all.ids - TeamMember.distinct.pluck(:teams_id)
+  not_exist_team.each do |id|
+    TeamMember.create!([{ teams_id: id,
+                          users_id: User.all.ids.sample,
+                          team_role: 0,
+                          is_creator: true }])
+  end
+
+  Team.all.each do |team|
+    roles_of_team = team.team_members.pluck(:team_role).map(&:to_sym)
+    roles_exist = Team::ROLES - roles_of_team
+    next unless roles_exist != Team::ROLES
+    roles_exist.each do |role|
+      TeamMember.create!(team_role: role,
+                         teams_id: team.id,
+                         users_id: User.all.ids.sample,
+                         is_creator: false)
+    end
+    3.times do
+      Idea.create!(idea_name: Faker::Music.band,
+                   idea_description: Faker::Movies::Lebowski.quote,
+                   need: Idea::NEED.sample,
+                   geo: Idea::GEO.sample,
+                   problem: Faker::Games::Dota.quote,
+                   industry: Idea::INDUSTRY.sample,
+                   visible: true,
+                   team: team,
+                   user: User.all.sample)
+    end
+  end
+
+  User.all.each do |user|
+    Idea.all.each do |idea|
+      Feedback.create!(reaction: Feedback::REACTION.sample,
+                       users_id: user.id,
+                       ideas_id: idea.id,
+                       rating: rand(1..5))
+    end
+  end
+end

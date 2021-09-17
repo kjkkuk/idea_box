@@ -18,12 +18,31 @@
 #  updated_at       :datetime         not null
 #
 class Idea < ApplicationRecord
-  has_many :comments, dependent: :destroy
+  has_many :feedbacks, dependent: :destroy, foreign_key: :ideas_id, inverse_of: :idea
   has_many :comments, as: :commentable, dependent: :destroy
-  belongs_to :user, foreign_key: :users_id, class_name: 'Idea', inverse_of: :user
-  belongs_to :team
+  belongs_to :user, inverse_of: :ideas, foreign_key: :users_id
+  belongs_to :team, inverse_of: :ideas, foreign_key: :teams_id, optional: true
 
-  validates :idea_name, :problem, :need, :geo, :industry, presence: true, length: { maximum: 50 }
-  validates :idea_description, presence: true, length: { maximum: 300 }
+  validates :idea_name, :need, :geo, :industry, presence: true, length: { maximum: 50 }
+  validates :idea_description, :problem, presence: true, length: { maximum: 300 }
   validates :visible, inclusion: { in: [true, false] }
+
+  INDUSTRY = %w(Art
+                Comics
+                Crafts
+                Dance
+                Design
+                Film&Video
+                Food
+                Games
+                Journalism
+                Music
+                Photography
+                Publishing
+                Technology
+                Theater).freeze
+
+  GEO = ['Asia', 'Europe', 'Africa', 'Australia', 'North America', 'South America', 'Global'].freeze
+
+  NEED = ['Funding', 'Mentoring', 'Marketing strategy', 'Team members'].freeze
 end

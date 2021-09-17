@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe TeamsController, type: :controller do
   let(:user) { create(:user) }
   let!(:team) { create(:team) }
-  let(:valid_attributes) { FactoryBot.attributes_for(:team) }
-  let(:invalid_attributes) { FactoryBot.attributes_for(:team, group: nil) }
+  let(:valid_attributes) { attributes_for(:team) }
+  let(:invalid_attributes) { attributes_for(:team, group: nil) }
 
   before { sign_in(user) }
 

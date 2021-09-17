@@ -38,6 +38,8 @@ gem 'cancancan', '~>3.3.0'
 # add comments
 gem 'annotate', '~>3.1.1'
 
+gem 'paper_trail', '~>12.1.0'
+
 gem 'lefthook', '~>0.7.6'
 
 gem 'dotenv-rails', '~>2.7.6'
@@ -69,6 +71,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
+  gem 'brakeman', '~>5.1.1'
   gem 'rubocop-rails', '~>2.11.3'
   gem 'rubocop', '~>1.18.4'
   gem 'rubocop-performance', '~> 1.11.0'

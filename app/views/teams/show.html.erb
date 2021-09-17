@@ -1,5 +1,68 @@
 <main>
-  <h1 style="color: green;">
+  <h1 class="head-name">
     <%= @team.team_name%>
   </h1>
+  <div class="row">
+    <div class="col s6">
+      <div class="row">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+      <div class="row">
+        <div class="col s4">
+          <p>
+            <label>
+              <input name="group1" type="radio" />
+              <span>Last Week</span>
+            </label>
+          </p>
+        </div>
+        <div class="col s4">
+          <p>
+            <label>
+              <input name="group1" type="radio" />
+              <span>Last Month</span>
+            </label>
+          </p>
+        </div>
+        <div class="col s4">
+          <p>
+            <label>
+              <input name="group1" type="radio" />
+              <span>Last Year</span>
+            </label>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col s6">
+      <table>
+        <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+          <th scope="col">Projects</th>
+          <th scope="col">Avg. rate</th>
+        </tr>
+        </thead>
+        <% @team.team_members.each do |team| %>
+          <tr>
+            <td><%= team.user.first_name %>
+              <%= team.user.last_name %></td>
+            <td><%= team.team_role%></td>
+            <% kol_vo = [] %>
+            <td><% team.user.ideas.all.each do |project|%>
+                <% kol_vo << project.id %>
+              <%end %>
+            <%= kol_vo.count %></td>
+            <% arr_rate = [] %>
+            <td><% team.user.feedbacks.all.each do |feedback| %>
+                <% arr_rate << feedback.rating %>
+                <%end %>
+            <%= (arr_rate.sum.to_f / arr_rate.size).round(1) %></td>
+          </tr>
+        <%end %>
+      </table>
+    </div>
+  </div>
+  <%= javascript_pack_tag 'charts', 'data-turbolinks-track': 'reload' %>
 </main>

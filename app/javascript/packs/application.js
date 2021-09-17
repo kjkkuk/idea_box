@@ -19,3 +19,15 @@ ActiveStorage.start()
 $(document).on('turbolinks:load', function() {
     $('.dropdown-trigger').dropdown();
 });
+
+$(document).on('turbolinks:load', function() {
+    const checkbox = document.querySelector('.checkbox-sponsor');
+    const selectors = document.querySelectorAll('.checkbox-sponsor ~ .form-group-for-disable select');
+    if (checkbox) {
+        checkbox.addEventListener('change', event => {
+            for (let selector of selectors) {
+                selector.disabled = !event.target.checked;
+            }
+        });
+    }
+});

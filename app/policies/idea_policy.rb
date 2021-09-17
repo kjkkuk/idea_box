@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TeamPolicy < ApplicationPolicy
+class IdeaPolicy < ApplicationPolicy
   def index?
     true
   end
