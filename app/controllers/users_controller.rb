@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      destroy_sponsor_profile if profile_should_destroy
+      destroy_sponsor_profile if profile_should_destroy?
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render action: 'edit'
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @user.sponsor.destroy!
   end
 
-  def profile_should_destroy
+  def profile_should_destroy?
     !user_params[:sponsor_profile_exists] && @user.sponsor_id
   end
 
