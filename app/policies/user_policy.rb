@@ -14,12 +14,12 @@ class UserPolicy < ApplicationPolicy
   end
 
   def impersonate?
-    all_members = []
-    user.team_members.where(is_creator: true).each do |tm|
+    all_members = user.team_members.where(is_creator: true).reduce([]) do |memo, tm|
       tm.team.team_members.where(is_creator: false).each do |not_creator|
-        all_members << not_creator
+        memo << not_creator.users_id
       end
+      memo
     end
-    all_members.pluck(:users_id).include?(record.id)
+    all_members.include?(record.id)
   end
 end
