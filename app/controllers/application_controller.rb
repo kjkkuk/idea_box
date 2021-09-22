@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include Pundit
+  impersonates :user
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

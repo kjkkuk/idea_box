@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'materialize-sass', '~> 1.0.0'
 
+gem 'pretender', '~>0.3.4'
+
 gem 'pry', '~>0.14.1'
 
 gem 'faker', '~>2.18.0'

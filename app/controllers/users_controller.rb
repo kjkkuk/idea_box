@@ -32,6 +32,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def impersonate
+    @user = User.find(params[:id])
+    impersonate_user(@user)
+    flash[:notice] = 'Impersonated success!'
+    redirect_to root_path
+  end
+
+  def stop_impersonating
+    stop_impersonating_user
+    redirect_to root_path
+  end
+
   private
 
   def destroy_sponsor_profile
