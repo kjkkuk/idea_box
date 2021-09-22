@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :teams
-  resources :ideas
+  resources :ideas do
+    resources :comments
+  end
   resources :users, only: [:index] do
     post :impersonate, on: :member
     post :stop_impersonating, on: :collection
