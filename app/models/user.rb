@@ -36,7 +36,7 @@ class User < ApplicationRecord
   has_many :ideas, dependent: :destroy, inverse_of: :user, foreign_key: :users_id
   has_many :feedbacks, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
   has_many :comments, as: :commentable, dependent: :destroy
-  belongs_to :sponsor
+  belongs_to :sponsor, optional: true
 
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze

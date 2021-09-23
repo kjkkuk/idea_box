@@ -13,7 +13,7 @@
 #  updated_at       :datetime         not null
 #
 class Comment < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, foreign_key: :users_id, inverse_of: :comments
   belongs_to :commentable, polymorphic: true
 
   validates :comment, presence: true, length: { maximum: 300 }

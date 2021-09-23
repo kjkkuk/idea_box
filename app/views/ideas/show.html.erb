@@ -50,4 +50,12 @@
       </div>
       </div>
     </div>
+    <div class="row">
+      <h2>Comments</h2>
+      <%= render 'comments/comment', idea: @idea %>
+      <% if user_signed_in? %>
+        <h2>Add a comment:</h2>
+        <%= render 'comments/form', idea: @idea %>
+      <% end %>
+    </div>
 </main>
