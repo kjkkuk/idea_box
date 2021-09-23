@@ -3,6 +3,14 @@
     <li class="list-group-item">
       <%= link_to comment.user.first_name, comment.user %>
       <p><%= comment.comment %></p>
+
+      <% if (current_user == comment.user) || (current_user.try(:admin?)) %>
+        <p>
+          <%= link_to 'Destroy Comment', idea_comment_path(comment),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %>
+        </p>
+      <% end %>
     </li>
   <% end %>
 </ul>

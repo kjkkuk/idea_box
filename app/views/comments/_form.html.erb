@@ -1,7 +1,9 @@
 <%= form_with model: [ @idea, @idea.comments.build ] do |form| %>
   <div class="form-group">
-    <%= form.label :comments %><br>
-    <%= form.text_area :comments, class: "form-control" %>
+    <%= form.label :comment %><br>
+    <%= form.text_area :comment, class: "form-control" %>
+    <%= form.hidden_field(:commentable_type, :value => 'Idea' )%>
+    <%= form.hidden_field(:commentable_id, :value => @idea.id) %>
   </div>
 
   <div>
