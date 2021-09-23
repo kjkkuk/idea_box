@@ -14,17 +14,18 @@ ActiveRecord::Base.transaction do
   Role.find_or_create_by(role: :admin)
   Role.find_or_create_by(role: :user)
 
-  20.times do
+  3.times do
     Team.find_or_create_by(team_name: Faker::Team.name)
   end
 
   User.create!(first_name: 'Dima',
                last_name: 'Yakutovich',
                email: 'kjk.kuk@mail.ru',
+               sponsor_id: nil,
                password: '1234567',
                password_confirmation: '1234567')
 
-  20.times do
+  3.times do
     first_name = Faker::FunnyName.name.split.first
     last_name = Faker::FunnyName.name.split.last
     email = Faker::Internet.email
@@ -32,6 +33,7 @@ ActiveRecord::Base.transaction do
     User.create!(first_name: first_name,
                  last_name: last_name,
                  email: email,
+                 sponsor_id: nil,
                  password: password,
                  password_confirmation: password)
   end
