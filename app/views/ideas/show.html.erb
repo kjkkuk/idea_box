@@ -51,17 +51,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="card my-1">
-        <div class="card-body">
-          <p class="font-weight-bold">Comments</p>
-          <%= form_with(model: @comment) do |f| %>
-            <div class="form-group">
-              <%= f.label 'New comment' %>
-              <%= f.text_area :comment, class: 'form-control' %>
-            </div>
-            <%= f.submit 'Submit', class: 'btn btn-primary' %>
-          <% end %>
-        </div>
-      </div>
+      <h2>Comments</h2>
+      <%= render 'comments/comment', article: @article %>
+      <% if user_signed_in? %>
+        <h2>Add a comment:</h2>
+        <%= render 'comments/form', article: @article %>
+      <% end %>
     </div>
 </main>

@@ -1,0 +1,8 @@
+<ul class="list-group">
+  <% @idea.comments.each do |comment| %>
+    <li class="list-group-item">
+      <%= link_to comment.user.first_name, comment.user %>
+      <p><%= comment.comment %></p>
+    </li>
+  <% end %>
+</ul>

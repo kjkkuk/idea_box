@@ -1,26 +1,16 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  def index
-    @comments = Comment.all
-  end
-
-  def show
-    @comment = Comment.find(params[:id])
-  end
-
-  def new
-    @comment = Comment.new
-  end
-
   def create
-    @comment = Comment.new(comment_params)
-    if @comment.save
-      flash[:success] = 'Comment successfully added'
-      redirect_to comments_path(@comment)
-    else
-      render 'new'
-    end
+    @idea = Idea.find(params[:ideas_id])
+    CreateCommentsService.call(comment_params, current_user, @article)
+    redirect_to idea_path(@idea)
+  end
+
+  def destroy
+    @idea = Idea.find(params[:ideas_id])
+    DestroyCommentsService.call(comment_params, current_user, @article)
+    redirect_to idea_path(@idea)
   end
 
   private

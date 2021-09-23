@@ -1,0 +1,10 @@
+<%= form_with model: [ @idea, @idea.comments.build ] do |form| %>
+  <div class="form-group">
+    <%= form.label :comments %><br>
+    <%= form.text_area :comments, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.submit 'Create comment', class: 'btn btn-outline-primary' %>
+  </div>
+<% end %>
