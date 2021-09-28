@@ -12,50 +12,82 @@
     </div>
   </div>
     <h4><%= @idea.idea_description %></h4>
+  <div class="col s12">
+    <ul class="tabs" id="tabs">
+      <li class="tab col s3"><a href="#tabs-1">About</a></li>
+      <li class="tab col s3"><a href="#tabs-2">Team</a></li>
+      <li class="tab col s3"><a href="#tabs-3">Sponsors</a></li>
+      <li class="tab col s3"><a href="#tabs-4">Statistics</a></li>
+    </ul>
+  </div>
+
+  <div id="tabs-1" class="col s12">
     <div class="row">
-      <div class="col s6">
-        <div class="row">
-          <div class="col s10">
-            <p>Industry: <%= @idea.industry %></p>
-            <p>Location: <%= @idea.geo %></p>
-            <p>Problem: <%= @idea.problem %></p>
-            <p>Need: <%= @idea.problem %></p>
-          </div>
-        </div>
-      </div>
-      <div class="col s6">
-        <%if @idea.team %>
-          <table>
-            <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Role</th>
-              <th scope="col">Projects</th>
-              <th scope="col">Avg. rate</th>
-            </tr>
-            </thead>
-            <% @idea.team.users.each do |team_user|%>
-            <tr>
-                <td><%=team_user.first_name %>
-                  <%=team_user.last_name %></td>
-                  <%end %>
-                </tr>
-            <h4>Team:</h4>
-          </table>
-        <%end %>
-      </div>
-    <div class="row">
-      <div class="col s4">
-        <p>Owner: <%= @idea.user.first_name%> <%=@idea.user.last_name %></p>
-      </div>
+      <div class="col s10">
+        <br>
+        <p>Industry: <%= @idea.industry %></p>
+        <p>Location: <%= @idea.geo %></p>
+        <p>Problem: <%= @idea.problem %></p>
+        <p>Need: <%= @idea.problem %></p>
       </div>
     </div>
+  </div>
+
+  <div id="tabs-2" class="col s12">
+    <div class="col s6">
+      <%if @idea.team %>
+        <table>
+          <thead>
+          <tr>
+            <th scope="col">Name</th>
+          </tr>
+          </thead>
+          <% @idea.team.users.each do |team_user|%>
+            <tr>
+              <td><%=team_user.first_name %>
+                <%=team_user.last_name %></td>
+<!--              <td><%# team_user.team_members.team_role %></td>-->
+            </tr>
+          <%end %>
+
+
+
+          <h4>Team:</h4>
+        </table>
+      <%end %>
+    </div>  </div>
+
+  <div id="tabs-3" class="col s12">
+    <h5>Tab Content 3</h5>
+  </div>
+
+  <div id="tabs-4" class="col s12">
+    <h5>Tab Content 4</h5>
+  </div>
+
     <div class="row">
-      <h2>Comments</h2>
+      <div class="col s6">
+
+      </div>
+
+
+    </div>
+    <div class="row">
+      <h4>Comments</h4>
       <%= render 'comments/comment', idea: @idea %>
       <% if user_signed_in? %>
-        <h2>Add a comment:</h2>
+        <h5>Add a comment:</h5>
         <%= render 'comments/form', idea: @idea %>
       <% end %>
     </div>
+  <% if current_user.subscribe_ideas.include?(ideas_id: @idea.id) %>
+    <h5><%= link_to "UnSubscribe", unsubscribe_idea_path(@idea), method: ':post', class: 'btn btn-primary' %></h5>
+  <% else %>
+    <h5><%= link_to "Subscribe", subscribe_idea_path(@idea), method: ':post', class: 'btn btn-primary' %></h5>
+  <% end %>
+  <div class="row">
+    <div class="col s4">
+      <p>Owner: <%= @idea.user.first_name%> <%=@idea.user.last_name %></p>
+    </div>
+  </div>
 </main>

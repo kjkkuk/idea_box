@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_104302) do
+ActiveRecord::Schema.define(version: 2021_09_24_063727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 2021_09_16_104302) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "subscribe_ideas", force: :cascade do |t|
+    t.bigint "ideas_id"
+    t.bigint "users_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ideas_id"], name: "index_subscribe_ideas_on_ideas_id"
+    t.index ["users_id"], name: "index_subscribe_ideas_on_users_id"
+  end
+
   create_table "team_members", force: :cascade do |t|
     t.integer "team_role", null: false
     t.bigint "teams_id"
@@ -129,6 +138,8 @@ ActiveRecord::Schema.define(version: 2021_09_16_104302) do
   add_foreign_key "feedbacks", "users", column: "users_id"
   add_foreign_key "ideas", "teams", column: "teams_id"
   add_foreign_key "ideas", "users", column: "users_id"
+  add_foreign_key "subscribe_ideas", "ideas", column: "ideas_id"
+  add_foreign_key "subscribe_ideas", "users", column: "users_id"
   add_foreign_key "team_members", "teams", column: "teams_id"
   add_foreign_key "team_members", "users", column: "users_id"
   add_foreign_key "users", "roles"

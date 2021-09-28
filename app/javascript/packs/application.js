@@ -18,6 +18,8 @@ ActiveStorage.start()
 
 $(document).on('turbolinks:load', function() {
     $('.dropdown-trigger').dropdown();
+    $('.slider').slider();
+    $('.tabs').tabs();
 });
 
 $(document).on('turbolinks:load', function() {

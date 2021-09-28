@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :ideas do
     resources :comments
   end
+  post '/ideas/:id/subscribe', to: 'subscribe_idea#subscribe', as: 'subscribe_idea'
+  post '/ideas/:id/unsubscribe', to: 'subscribe_idea#unsubscribe', as: 'unsubscribe_idea'
+
   resources :users, only: [:index] do
     post :impersonate, on: :member
     post :stop_impersonating, on: :collection

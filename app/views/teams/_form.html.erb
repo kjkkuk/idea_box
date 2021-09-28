@@ -6,7 +6,7 @@
 
   <div class="form-group">
     <%= form.label :team_role %>
-    <%= form.select :team_role, options_for_select(Team::ROLES, @team.team_role), {}%>
+    <%= form.select :team_role, options_for_select(Team::ROLES), {}%>
   </div>
 
   <div class="form-group">
