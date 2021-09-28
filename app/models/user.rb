@@ -30,12 +30,13 @@ class User < ApplicationRecord
   before_validation :set_default_role, on: [:create]
 
   belongs_to :role
+  has_many :subscribe_ideas, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
   has_many :authorizations, dependent: :destroy
   has_many :team_members, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
   has_many :teams, through: :team_members, dependent: :destroy
   has_many :ideas, dependent: :destroy, inverse_of: :user, foreign_key: :users_id
   has_many :feedbacks, dependent: :destroy, foreign_key: :users_id, inverse_of: :user
-  has_many :comments, as: :commentable, dependent: :destroy
+  has_many :comments, dependent: :destroy
   belongs_to :sponsor, optional: true
 
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }

@@ -20,6 +20,7 @@
 class Idea < ApplicationRecord
   has_many :feedbacks, dependent: :destroy, foreign_key: :ideas_id, inverse_of: :idea
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :subscribe_ideas, dependent: :destroy, foreign_key: :ideas_id, inverse_of: :idea
   belongs_to :user, inverse_of: :ideas, foreign_key: :users_id
   belongs_to :team, inverse_of: :ideas, foreign_key: :teams_id, optional: true
 
