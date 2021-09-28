@@ -1,59 +1,33 @@
-<div class="section no-pad-bot orange lighten-5" id="index-banner">
-  <div class="container">
-    <br><br>
-    <h1 class="header center  orange-text text-darken-3">Starter Template</h1>
-    <div class="row center">
-      <h5 class="header col s12 light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</h5>
-    </div>
-    <div class="row center">
-      <a href="#" class="btn-large waves-effect waves-light orange darken-3">View more</a>
-    </div>
-    <br><br>
-
-  </div>
+<br>
+<div class="slider">
+  <ul class="slides">
+    <% Idea.all.sample(4).each do |slide_idea| %>
+      <li>
+        <div class="caption left-align">
+          <h3><%= link_to  slide_idea.idea_name, idea_path(slide_idea), method: :get %></h3>
+          <h5 class="light grey-text text-lighten-3">
+            <%= link_to  slide_idea.idea_description, idea_path(slide_idea), method: :get %>
+          </h5>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
-
-<div class="container">
-  <div class="section">
-
-    <!--   Icon Section   -->
-    <div class="row">
+<ul class="cards-item">
+  <% @ideas = Idea.all.paginate(page: params[:page], per_page: 6) %>
+  <% @ideas.each do |idea| %>
+    <li class="cards-item-plate">
       <div class="col s12 m4">
-        <div class="icon-block">
-          <h2 class="center light-blue-text"><i class="fa fa-connectdevelop"></i></h2>
-          <h5 class="center">Feature one</h5>
-
-          <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-          </p>
-        </div>
+        <h4><%= link_to  idea.idea_name, idea_path(idea), method: :get %></h4>
+        <p class="light">Location: <%= idea.geo %></p>
+        <p class="light">Need: <%= idea.need %></p>
+        <p class="light">Owner: <%= idea.user.first_name%> <%=idea.user.last_name %></p>
       </div>
+    </li>
+  <% end %>
+</ul>
+<%= will_paginate @ideas%>
+<br>
 
-      <div class="col s12 m4">
-        <div class="icon-block">
-          <h2 class="center light-blue-text"><i class="fa fa-user-plus"></i></h2>
-          <h5 class="center">Feature two</h5>
 
-          <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-          </p>
-        </div>
-      </div>
-
-      <div class="col s12 m4">
-        <div class="icon-block">
-          <h2 class="center"><i class="fa fa-cogs"></i></h2>
-          <h5 class="center">Feature three</h5>
-
-          <p class="light">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-          </p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <br><br>
-
-  <div class="section">
-
-  </div>
-</div>

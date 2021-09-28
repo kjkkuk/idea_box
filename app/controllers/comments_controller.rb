@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @comment = Idea.find(params[:idea_id]).comments.new(comment_params)
+    @idea = Idea.find(params[:idea_id])
+    @comment = @idea.comments.new(comment_params)
     authorize @comment
     @comment.users_id = current_user.id
     if @comment.save
