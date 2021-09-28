@@ -14,10 +14,16 @@ class TeamPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present?
+    user.team_members.where(is_creator: true).each do |creator|
+      @output = (creator.teams_id == record.id)
+    end
+    @output
   end
 
   def destroy?
-    user.present?
+    user.team_members.where(is_creator: true).each do |creator|
+      @output = (creator.teams_id == record.id)
+    end
+    @output
   end
 end

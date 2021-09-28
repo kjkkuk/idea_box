@@ -7,39 +7,48 @@
   <table class="table table-bordered table-hover">
       <div class="post-preview">
         <h4 class="post-title titleFont">
-          <% @ideas.each do |record| %>
-            <tr>
-              <% unless !record.visible && record.users_id != current_user.id %>
-                <td>
-                  <%= link_to record.idea_name, idea_path(record), method: :get %>
-                </td>
-                <td>
-                  <% unless record.visible %>
-                      [draft]
-                  <% end %>
-                </td>
-                <%if record.users_id == current_user.id %>
-                  <td class="table-row">
-                    <% if policy(record).destroy? %>
-                      <%= link_to "Destroy", idea_path(record),
-                                  method: :delete,
-                                  data: { confirm: "Are you sure?" },
-                                  class: 'btn btn-outline-danger' %>
+          <% if user_signed_in? %>
+            <% @ideas.each do |record| %>
+              <tr>
+                <% unless !record.visible && record.users_id != current_user.id %>
+                  <td>
+                    <%= link_to record.idea_name, idea_path(record), method: :get %>
+                  </td>
+                  <td>
+                    <% unless record.visible %>
+                        [draft]
                     <% end %>
                   </td>
+                  <%if record.users_id == current_user.id %>
+                    <td class="table-row">
+                      <% if policy(record).destroy? %>
+                        <%= link_to "Destroy", idea_path(record),
+                                    method: :delete,
+                                    data: { confirm: "Are you sure?" },
+                                    class: 'btn btn-outline-danger' %>
+                      <% end %>
+                    </td>
 
-                  <td class="table-row">
-                    <% if policy(record).update? %>
-                      <%= link_to "Edit", edit_idea_path(record), class: 'btn btn-primary' %>
-                    <% end %>
-                  </td>
+                    <td class="table-row">
+                      <% if policy(record).update? %>
+                        <%= link_to "Edit", edit_idea_path(record), class: 'btn btn-primary' %>
+                      <% end %>
+                    </td>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </tr>
-          <%end %>
+              </tr>
+            <%end %>
+          <% else %>
+            <div class="row">
+              <div class="col">
+                <p>For further viewing, you should sign in:</p>
+                <%= link_to "Sign in", new_user_session_path, class: 'btn btn-outline-primary' %>
+              </div>
+            </div>
+          <% end %>
         </h4>
       </div>
-      <hr>
+
   </table>
 </div>
 </div>

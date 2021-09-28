@@ -3,16 +3,15 @@
     <div class="row">
       <div class="col l6 s12">
         <h5 class="white-text">Idea Box</h5>
-
         <p class="grey-text text-lighten-4">You're only a step away from kicking off<columns></columns> your entrepreneurial adventure on Idea Box.</p>
       </div>
       <div class="col l4 offset-l2 s12">
         <h5 class="white-text">About</h5>
         <ul>
-          <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Why Idea Box?</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Careers</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Contact</a></li>
+          <li><%= link_to "About Us", pages_path('about_us'), class: 'footer-links'%></li>
+          <li><%= link_to "Why Idea Box?", pages_path('why_idea_box'), class: 'footer-links'%></li>
+          <li><%= link_to "Careers", pages_path('careers'), class: 'footer-links'%></li>
+          <li><%= link_to "Contact", pages_path('contact'), class: 'footer-links'%></li>
         </ul>
       </div>
     </div>

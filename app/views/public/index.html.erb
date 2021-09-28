@@ -1,11 +1,13 @@
 <br>
 <div class="slider">
   <ul class="slides">
-    <% Idea.all.sample(4).each do |sl_idea| %>
+    <% Idea.all.sample(4).each do |slide_idea| %>
       <li>
         <div class="caption left-align">
-          <h3><%= sl_idea.idea_name %></h3>
-          <h5 class="light grey-text text-lighten-3"><%= sl_idea.idea_description %></h5>
+          <h3><%= link_to  slide_idea.idea_name, idea_path(slide_idea), method: :get %></h3>
+          <h5 class="light grey-text text-lighten-3">
+            <%= link_to  slide_idea.idea_description, idea_path(slide_idea), method: :get %>
+          </h5>
         </div>
       </li>
     <% end %>
@@ -17,10 +19,10 @@
   <% @ideas.each do |idea| %>
     <li class="cards-item-plate">
       <div class="col s12 m4">
-        <h4><%= idea.idea_name %></h4>
-        <p class="light">Owner: <%= idea.user.first_name%> <%=idea.user.last_name %></p>
+        <h4><%= link_to  idea.idea_name, idea_path(idea), method: :get %></h4>
         <p class="light">Location: <%= idea.geo %></p>
         <p class="light">Need: <%= idea.need %></p>
+        <p class="light">Owner: <%= idea.user.first_name%> <%=idea.user.last_name %></p>
       </div>
     </li>
   <% end %>
