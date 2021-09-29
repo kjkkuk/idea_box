@@ -1,6 +1,15 @@
 <body>
 <main>
-  <h1>Ideas</h1>
+  <div class="row">
+    <div class="col s6">
+      <h1>Ideas</h1>
+    </div>
+    <div class="col s6">
+      <% if user_signed_in? %>
+    <h1 class="right"><%= link_to "New", new_idea_path(@idea), class: 'btn btn-primary' %></h1>
+        <% end %>
+    </div>
+  </div>
 </main>
 
 <div class="row">
@@ -28,7 +37,6 @@
                                     class: 'btn btn-outline-danger' %>
                       <% end %>
                     </td>
-
                     <td class="table-row">
                       <% if policy(record).update? %>
                         <%= link_to "Edit", edit_idea_path(record), class: 'btn btn-primary' %>

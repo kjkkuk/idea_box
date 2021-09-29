@@ -1,6 +1,15 @@
 <body>
   <main>
-  <h1>Teams</h1>
+    <div class="row">
+      <div class="col s6">
+        <h1>Teams</h1>
+      </div>
+      <div class="col s6">
+        <% if user_signed_in? %>
+      <h1 class="right"><%= link_to "New", new_team_path(@team), class: 'btn btn-primary' %></h1>
+          <% end %>
+      </div>
+    </div>
   </main>
 
 <div class="row">
@@ -8,27 +17,30 @@
     <thead class="thead-light">
   <div class="col s12 m10 offset-m1 l9 offset-l1">
     <div class="post-preview">
-        <h4 class="post-title titleFont">
-          <% @teams.each do |record| %>
-            <tr>
-              <td class="table-row"></td>
-              <td><%= link_to record.team_name, team_path(record), method: :get %></td>
-              <td class="table-row">
-              <% if policy(record).destroy? %>
-                <%= link_to "Destroy", team_path(record),
-                              method: :delete,
-                              data: { confirm: "Are you sure?" },
-                              class: 'btn btn-outline-danger' %>
-                <% end %>
-              </td>
-              <td class="table-row">
-              <% if policy(record).update? %>
-                <%= link_to "Edit", edit_team_path(record), class: 'btn btn-primary' %>
+      <h4 class="post-title titleFont">
+        <% @teams.each do |record| %>
+          <tr>
+            <td class="table-row"></td>
+            <td><%= link_to record.team_name, team_path(record), method: :get %></td>
+            <td class="table-row">
+              <% if user_signed_in? %>
+            <% if policy(record).destroy? %>
+              <%= link_to "Destroy", team_path(record),
+                            method: :delete,
+                            data: { confirm: "Are you sure?" },
+                            class: 'btn btn-outline-danger' %>
               <% end %>
+            </td>
+            <td class="table-row">
+            <% if policy(record).update? %>
+              <%= link_to "Edit", edit_team_path(record), class: 'btn btn-primary' %>
+            <% end %>
+              <% end %>
+
               </td>
-            </tr>
-          <% end %>
-        </h4>
+          </tr>
+        <% end %>
+      </h4>
     </div>
     <hr>
   </div>
