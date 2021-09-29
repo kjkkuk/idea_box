@@ -17,14 +17,16 @@
 <ul class="cards-item">
   <% @ideas = Idea.all.paginate(page: params[:page], per_page: 6) %>
   <% @ideas.each do |idea| %>
-    <li class="cards-item-plate">
-      <div class="col s12 m4">
-        <h4><%= link_to  idea.idea_name, idea_path(idea), method: :get %></h4>
-        <p class="light">Location: <%= idea.geo %></p>
-        <p class="light">Need: <%= idea.need %></p>
-        <p class="light">Owner: <%= idea.user.first_name%> <%=idea.user.last_name %></p>
-      </div>
-    </li>
+    <% if idea.visible %>
+      <li class="cards-item-plate">
+        <div class="col s12 m4">
+          <h4><%= link_to  idea.idea_name, idea_path(idea), method: :get %></h4>
+          <p class="light">Location: <%= idea.geo %></p>
+          <p class="light">Need: <%= idea.need %></p>
+          <p class="light">Owner: <%= idea.user.first_name%> <%=idea.user.last_name %></p>
+        </div>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 <%= will_paginate @ideas%>

@@ -75,18 +75,19 @@
   </div>
 
     <div class="row">
-      <h4>Comments</h4>
+      <h5>Comments:</h5>
       <%= render 'comments/comment', idea: @idea %>
-      <% if user_signed_in? %>
-        <h5>Add a comment:</h5>
+      <% if user_signed_in? && @idea.visible%>
+        <h6>Add a comment:</h6>
         <%= render 'comments/form', idea: @idea %>
-      <% end %>
+
     </div>
-  <% if current_user.subscribe_ideas.where(ideas_id: @idea.id).exists? %>
-    <h5><%= link_to "UnSubscribe", unsubscribe_idea_path(@idea), method: ':post', class: 'btn btn-primary' %></h5>
-  <% else %>
-    <h5><%= link_to "Subscribe", subscribe_idea_path(@idea), method: ':post', class: 'btn btn-primary' %></h5>
-  <% end %>
+        <% if current_user.subscribe_ideas.where(ideas_id: @idea.id).exists? %>
+          <h5><%= link_to "UnSubscribe", unsubscribe_idea_path(@idea), method: ':post', class: 'btn btn-primary' %></h5>
+        <% else %>
+          <h5><%= link_to "Subscribe", subscribe_idea_path(@idea), method: ':post', class: 'btn btn-primary' %></h5>
+        <% end %>
+      <% end %>
   <div class="row">
     <div class="col s4">
       <p>Owner: <%= @idea.user.first_name%> <%=@idea.user.last_name %></p>
