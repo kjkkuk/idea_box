@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   resources :users
   resources :teams
+
+  # post '/teams/:id/add_member', to: 'teams#add_member', as: 'add_member'
+
   resources :ideas do
     resources :comments
   end

@@ -19,6 +19,12 @@ class TeamsController < ApplicationController
 
   def edit; end
 
+  # def add_member
+  #   @team.update(member_params)
+  #   @team.team_members << TeamMember.new(users_id: first_name, is_creator: false, team: @team,
+  #                                        team_role: params[:team][:team_role])
+  # end
+
   def update
     if @team.update(team_params)
       redirect_to action: :index
@@ -52,6 +58,10 @@ class TeamsController < ApplicationController
   def team_params
     params.require(:team).permit(:team_name)
   end
+
+  # def member_params
+  #   params.require(:team).permit(:teams_id, :team_role, :users_id)
+  # end
 
   def errors_messages
     flash[:error] = @team.errors.full_messages
