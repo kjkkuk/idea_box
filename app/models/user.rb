@@ -45,6 +45,11 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :sponsor
 
+  has_one_attached :profile_picture, dependent: :destroy
+  validates :profile_picture, content_type: [:png, :jpg, :jpeg]
+
+  acts_as_voter
+
   def sponsor_profile_exists
     !!sponsor_id
   end

@@ -28,20 +28,43 @@ gem 'will_paginate', '~>3.3.1'
 
 gem 'materialize-sass', '~> 1.0.0'
 
+# track views
+gem 'impressionist', '~> 2.0.0'
+
+# impersonation
 gem 'pretender', '~>0.3.4'
 
 gem 'pry', '~>0.14.1'
 
 gem 'faker', '~>2.18.0'
 
+# images
+gem 'aws-sdk-s3', '~>1.104.0'
+gem 'image_processing', '~> 1.12', '>= 1.12.1'
+gem 'active_storage_validations', '~> 0.9.5'
+
+# manage roles
 gem 'pundit', '~>2.1.0'
 
 gem 'devise', '~>4.8.0'
 
-# add comments
+# likes/dislikes
+gem 'acts_as_votable', '~>0.13.1'
+
+# icons
+gem 'font_awesome5_rails', '~>1.5.0'
+
+# comments to models, routes
 gem 'annotate', '~>3.1.1'
 
+# for chart
 gem 'paper_trail', '~>12.1.0'
+
+# search
+gem 'elasticsearch-model', '~> 7.2'
+gem 'elasticsearch-rails', '~> 7.2'
+gem 'elasticsearch-persistence', '~> 7.2'
+# gem 'chewy', '~> 7.2.2'
 
 gem 'lefthook', '~>0.7.6'
 
@@ -66,7 +89,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'rails-erd'
+  gem 'rails-erd', '~>1.6.1'
 
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'

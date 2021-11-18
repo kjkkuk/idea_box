@@ -72,6 +72,8 @@
       <% sponsors << sub_idea.user.sponsor_id %>
     <% end %>
     <p>Number of subscribed sponsors: <%= sponsors.count %></p>
+    <p>Views: <%= PageView.all_views(@idea.id)  %></p>
+    <p>Unique views: <%= PageView.uniq_all_views(@idea.id)%></p>
   </div>
 
     <div class="row">
@@ -93,4 +95,14 @@
       <p>Owner: <%= @idea.user.first_name%> <%=@idea.user.last_name %></p>
     </div>
   </div>
+    <div class="row">
+      <%= render @idea.feedbacks %>
+    </div>
+      <div class="col s4">
+        <% @idea.feedbacks.where(users_id: current_user.id).each do |feedback| %>
+          <% if feedback.user == current_user %>
+            <%=  link_to 'Add Rating', new_idea_feedback_path(@idea) %>
+          <% end %>
+        <%  end %>
+      </div>
 </main>

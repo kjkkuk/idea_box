@@ -44,6 +44,16 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def delete_image
+    image = ActiveStorage::Attachment.find(params[:id])
+    if current_user == image.record
+      image.purge
+      redirect_back(fallback_location: request.referer)
+    else
+      redirect_to root_url, notice: 'Oops!'
+    end
+  end
+
   private
 
   def destroy_sponsor_profile
@@ -68,6 +78,7 @@ class UsersController < ApplicationController
                                  :last_name,
                                  :email,
                                  :role_id,
+                                 :profile_picture,
                                  :sponsor_profile_exists,
                                  :password,
                                  sponsor_attributes: [:industry,

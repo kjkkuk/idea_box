@@ -1,0 +1,31 @@
+<h1>Edit Rating</h1>
+
+<%= form_with model: [ @idea, @feedback ] do |form| %>
+
+  <div class="form-group">
+    <div class="form-group row" id="star">
+      <%= form.label :rating,'Evaluation', class:'col-md-3 col-form-label' %>
+      <%= form.hidden_field :rating, id: :review_star %>
+    </div>
+
+    <!--Rating javascript-->
+    <script>
+        $('#star').raty({
+            size     : 36,
+            numberMax: 5,
+            number: 5,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+
+            scoreName: 'feedback[rating]',
+            half: false,
+        });
+    </script>
+    <%= form.hidden_field(:reaction, :value => nil )%>
+  </div>
+
+  <div>
+    <%= form.submit 'Submit', class: 'btn btn-outline-primary' %>
+    <%= link_to 'Back', :back, class: 'btn btn-outline-secondary' %>
+  </div>
+<% end %>
