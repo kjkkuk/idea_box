@@ -1,0 +1,25 @@
+<%= link_to like_idea_path(idea), method: :patch, remote: true, id: "like-link-#{idea.id}" do %>
+  <% if current_user.voted_up_on?(idea) %>
+    UP voted
+    <b>
+      <%= idea.cached_votes_up %>
+    </b>
+    DOWN vote
+    <b><%= idea.cached_votes_down %></b>
+
+  <% elsif current_user.voted_down_on?(idea) %>
+    UP vote
+    <b>
+      <%= idea.cached_votes_up %>
+    </b>
+    DOWN voted
+    <b><%= idea.cached_votes_down %></b>
+  <% else %>
+    UP
+    <b>
+      <%= idea.cached_votes_up %>
+    </b>
+    DOWN
+    <b><%= idea.cached_votes_down %></b>
+  <% end %>
+<% end %>

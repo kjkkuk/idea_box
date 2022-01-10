@@ -19,6 +19,14 @@ class TeamsController < ApplicationController
 
   def edit; end
 
+  def add_member
+    @team = Team.find(params[:id])
+    render :add_member
+    @team.team_members << TeamMember.new(users_id: id, is_creator: false, team: @team,
+                                         team_role: params[:team][:team_role])
+    redirect_to @team
+  end
+
   def update
     if @team.update(team_params)
       redirect_to action: :index
@@ -49,9 +57,18 @@ class TeamsController < ApplicationController
     redirect_to teams_path(@team)
   end
 
+  private
+
   def team_params
     params.require(:team).permit(:team_name)
   end
+
+ # def member_params
+  #  params.require(:team).permit(:teams_id, :team_role, :users_id)
+  # end<<<<<<< rating
+65
+ 
+
 
   def errors_messages
     flash[:error] = @team.errors.full_messages
@@ -59,5 +76,12 @@ class TeamsController < ApplicationController
 
   def set_team
     @team = Team.find(params[:id])
+  end
+
+  def period
+    @team.versions.each do |version|
+      version.object['team_members_count']
+      version.created_at.strftime('%Y-%m-%d')
+    end
   end
 end

@@ -22,6 +22,8 @@ $secondary-color: color("yellow", "base") !default;
 @import 'materialize';
 @import "nav";
 @import "devise";
+@import 'easy-autocomplete';
+@import 'easy-autocomplete.themes';
 
 select {
   display: block;
@@ -152,4 +154,35 @@ header {
 
 .footer-links {
   color: #ffffff;
+}
+
+.profile-picture {
+  height: 100px;
+  width: 100px;
+}
+
+.no-profile-picture {
+  background: #CCC;
+}
+
+.upload-hider-labels {
+  display: block;
+  height: 34px;
+  padding: 6px 12px;
+  width: 100%;
+
+  .replace-upload, .remove-upload {
+    font-size: 11px;
+    text-decoration: underline;
+  }
+
+  .separator-bar {
+    color: #dcdcdc;
+    margin: 0 18px;
+  }
+}
+
+.upload-hider-fields {
+  height: 100%;
+  width: 100%;
 }

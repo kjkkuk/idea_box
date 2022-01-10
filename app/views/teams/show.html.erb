@@ -5,33 +5,23 @@
   <div class="row">
     <div class="col s6">
       <div class="row">
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <canvas id="myChart" width="400" height="400" data-labels="<%=@team%>" data-data="<%=@team%>"></canvas>
       </div>
       <div class="row">
-        <div class="col s4">
-          <p>
-            <label>
-              <input name="group1" type="radio" />
-              <span>Last Week</span>
-            </label>
-          </p>
-        </div>
-        <div class="col s4">
-          <p>
-            <label>
-              <input name="group1" type="radio" />
-              <span>Last Month</span>
-            </label>
-          </p>
-        </div>
-        <div class="col s4">
-          <p>
-            <label>
-              <input name="group1" type="radio" />
-              <span>Last Year</span>
-            </label>
-          </p>
-        </div>
+
+          <label>
+            <input name='period' type='radio' class='radio' value='week' checked />
+            <span>Week</span>
+          </label>
+          <label>
+            <input name='period' type='radio' class='radio' value='month' />
+            <span>Month</span>
+          </label>
+          <label>
+            <input name='period' type='radio' class='radio' value='year' />
+            <span>Year</span>
+          </label>
+
       </div>
     </div>
     <div class="col s6">
@@ -62,7 +52,16 @@
           </tr>
         <%end %>
       </table>
+
+      <%= link_to 'Add teammate',
+                  add_member_team_url(@team),
+                  method: :post,
+                  class: 'remove-upload'
+      %>
     </div>
+    <%= @team.versions.where(event: 'update').each do |ver| %>
+      <%= ver.object %>
+    <% end %>
   </div>
   <%= javascript_pack_tag 'charts', 'data-turbolinks-track': 'reload' %>
 </main>

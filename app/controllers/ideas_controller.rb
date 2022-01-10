@@ -20,6 +20,7 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.find(params[:id])
     authorize @idea
+    impressionist(@idea)
   end
 
   def edit; end
@@ -55,6 +56,26 @@ class IdeasController < ApplicationController
     else
       errors_messages
     end
+  end
+
+  def like
+    @idea = Idea.find(params[:id])
+    if current_user.voted_up_on? @idea
+      @idea.downvote_by current_user
+    elsif current_user.voted_down_on? @idea
+      @idea.upvote_by current_user
+      # else # not voted
+      #   @idea.upvote_by current_user
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def search
+    return if query.blank?
+
+    @posts = Post.our_first_query(query)
   end
 
   private

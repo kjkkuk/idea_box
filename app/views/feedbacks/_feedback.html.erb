@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+  <% if feedback.users_id == current_user.id %>
+    <div id="rate<%= feedback.id %>"></div>
+    <%= link_to 'Edit', edit_idea_feedback_path(feedback.idea, feedback) %>
+    <%= link_to 'Delete', idea_feedback_path(feedback.idea, feedback), method: :delete, data: {
+      confirm: "Are you sure?" } %>
+
+  <% end %>
+<% end %>
+<script>
+    $('#rate<%= feedback.id%>').raty({
+        size      : 36,
+        starOff   : '<%= asset_path('star-off.png') %>',
+        starOn    : '<%= asset_path('star-on.png') %>',
+        starHalf  : '<%= asset_path('star-half.png') %>',
+        readOnly: true,
+        score: <%= feedback.rating %>,
+    });
+</script>

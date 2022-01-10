@@ -42,6 +42,14 @@
                         <%= link_to "Edit", edit_idea_path(record), class: 'btn btn-primary' %>
                       <% end %>
                     </td>
+                    <td class="table-row">
+                      <% if current_user %>
+                        <%= content_tag "div", id: "like-link-#{record.id}" do %>
+                          <%#binding.pry %>
+                          <%#= render 'ideas/like_link', post: record %>
+                        <% end %>
+                      <% end %>
+                    </td>
                   <% end %>
                 <% end %>
               </tr>
@@ -61,3 +69,14 @@
 </div>
 </div>
 </body>
+
+<h1>Posts</h1>
+<% @ideas.each do |idea| %>
+  <%= idea.idea_name %>
+  <% if current_user %>
+    <%= content_tag "div", id: "like-link-#{idea.id}" do %>
+      <%= render 'ideas/like_link', idea: idea %>
+    <% end %>
+  <% end %>
+  <hr>
+<% end %>
