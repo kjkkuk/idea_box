@@ -63,9 +63,12 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:team_name)
   end
 
-  def member_params
-    params.require(:team).permit(:teams_id, :team_role, :users_id)
-  end
+ # def member_params
+  #  params.require(:team).permit(:teams_id, :team_role, :users_id)
+  # end<<<<<<< rating
+65
+ 
+
 
   def errors_messages
     flash[:error] = @team.errors.full_messages
